@@ -1,2 +1,2 @@
-# Capstone--1-Accounting-Ledger
+# Capstone-1-Accounting-Ledger
 CAPSTONE 1
