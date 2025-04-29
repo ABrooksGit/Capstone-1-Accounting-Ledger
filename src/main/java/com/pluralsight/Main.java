@@ -23,8 +23,10 @@ public class Main {
 
     public static void main(String[] args) {
 
+        //Loads the Transactions from the csv file.
+        getAllTransactions();
 
-    getAllTransactions();
+        //Loads the Home Screen
         homeScreen();
 
 
@@ -102,9 +104,6 @@ public class Main {
     }
 
 
-
-
-
     //EncodeTransactions
     private static Transaction transactionStringEncoded(String encodedFiles) {
 
@@ -131,13 +130,14 @@ public class Main {
             FileWriter transactionLog = new FileWriter(fileName, true);
             BufferedWriter bufferedWriter = new BufferedWriter(transactionLog);
 
+            //Only writes the latest addition
             Transaction lastTransactionOnly = transactions.get(transactions.size() - 1);
 //            LocalDateTime today = LocalDateTime.now();
 //            DateTimeFormatter iso =
 //                    DateTimeFormatter.ofPattern("\nyyyy-MM-dd|HH:mm:ss |");
 //            String printedDate = today.format(iso);
             String formattedTxt = lastTransactionOnly.getFormattedTransaction();
-            bufferedWriter.write("\n"+formattedTxt);
+            bufferedWriter.write("\n" + formattedTxt);
 
             bufferedWriter.close();
         } catch (IOException e) {
@@ -153,7 +153,7 @@ public class Main {
         String vendor = console.promptForString("Vendors Name?: ").trim();
         double amount = console.promptForDouble("Input the amount: ");
 
-        if(isPayment){
+        if (isPayment) {
             amount = -amount;
         }
 
@@ -198,7 +198,7 @@ public class Main {
 
             switch (choice.toUpperCase()) {
                 case "A":
-                    displayAllTransactions();
+                    displayAllTransactions(); // Shows both Deposits and Payments
                     break;
 
                 case "D": //Deposits Only;
@@ -213,7 +213,7 @@ public class Main {
                     reportScreen();
                     break;
 
-                case "H":
+                case "H": //Returns to the Home Page
                     break;
 
             }
@@ -287,7 +287,7 @@ public class Main {
                     searchViaDatesAndYears(4); // Previous Year
                     break;
                 case 5:
-                    searchByVendor(); // Type Vendor to search
+                    findVendor(); // Type Vendor to search
                     break;
                 case 0:
                     break;
@@ -398,10 +398,105 @@ public class Main {
     }
 
 
-    //Format the time and dates to the log using TransactionManager Class
+    private static void customSearch() {
+
+        String startDate = console.promptForString("Start Date (YYYY-MM-DD): ");
+        String endDate = console.promptForString("End Date (YYYY-MM-DD): ");
+        String description = console.promptForString("Description: ");
+        String vendor = console.promptForString("Vendor: ");
+        double amount = console.promptForDouble("Amount: ");
+
+        ArrayList<Transaction> filteredResults = transactions;
+
+        // filteredResults = filterByStartDate(filteredResults, startDate);
+
+        // Parse the start and end dates
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+
+        // Loop through all transactions
+        for (Transaction t : transactions) {
+            if (t == null) {
+                continue;
+            }
 
 
-    // Display The Format For The Time and Dates to the Console itself
+        }
+    }
+
+    private static ArrayList<Transaction> filterByStartDate(ArrayList<Transaction> input, LocalDate startDate) {
+        ArrayList<Transaction> result = new ArrayList<Transaction>();
+        //loop through original "input", and add to result if appropriate...
+        for (Transaction t : input) {
+            if()//should this be here?){
+            {
+                result.add(t);
+            }
+
+        }
+    }
+
+
+
+
+    private static void findYearDay(){
+        String findYearDay = console.promptForString("Find Year/Day (YYYY-MM-DD): ");
+        LocalDate start = LocalDate.parse(findYearDay);
+
+        for(Transaction t : transactions){
+            if(t == null){
+                continue;
+            }
+            if(t.getDate() == start){
+                System.out.println(t.showSpecificValues());
+            }
+        }
+
+
+    }
+
+    private static void findDescription(){
+        String description = console.promptForString("Description: ");
+        for(Transaction t : transactions){
+            if(t == null){
+                continue;
+            }
+            if(t.getDescription().equalsIgnoreCase(description)){
+                System.out.println(t.showSpecificValues());
+            }
+        }
+
+    }
+
+
+    private static void findVendor() {
+        String findVendor = console.promptForString("Vendor: ");
+        for (Transaction t : transactions) {
+            if (t.getVendor().equalsIgnoreCase(findVendor)) {
+                System.out.println(t.showSpecificValues());
+            }
+        }
+    }
+
+
+    private static void findAmount(){
+        double amount = console.promptForDouble("Amount: ");
+
+        for (Transaction t : transactions) {
+            if (t == null) {
+                continue;
+            }
+            if (t.getAmount() == amount) {
+                System.out.println(t.showSpecificValues());
+            }
+        }
+
+
+
+
+    }
+
+
 
 
 }
