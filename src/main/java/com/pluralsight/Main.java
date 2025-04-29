@@ -1,10 +1,10 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.regex.Pattern;
 
 public class Main {
@@ -14,15 +14,16 @@ public class Main {
 
     //Transaction Manager Class
     private static TransactionManager format;
-    //Hash
-    static HashMap<String, TransactionManager> entireList = new HashMap<String, TransactionManager>();
+    //FileName as variable
+    private static String fileName = "transactions.csv";
+   
     //ArrayList
-    private static ArrayList<TransactionManager> transactions;
+    private static ArrayList<TransactionManager> transactions = new ArrayList<>();
 
     public static void main(String[] args) {
 
 
-        displayAllTransactions();
+        homeScreen();
 
 
     }
@@ -49,10 +50,12 @@ public class Main {
         do {
             input = console.promptForString(home);
             if (input.equalsIgnoreCase("D")) {
-                //Make A Deposit
+                //Make A Deposit(payment will be false)
+                depositOrPaymentTransaction(false);
 
             } else if (input.equalsIgnoreCase("P")) {
-                //Make A Payment
+                //Make A Payment(payment will be true)
+                depositOrPaymentTransaction(true);
 
             } else if (input.equalsIgnoreCase("L")) {
                 //GO to the Ledger Screen
@@ -68,68 +71,96 @@ public class Main {
     }
 
 
-    //Make An Array List:
-    private static ArrayList<TransactionManager> getAllTransactions() {
+//    //Make An Array List:
+//    private static ArrayList<TransactionManager> getAllTransactions() {
+//
+//        try {
+//            FileReader transactionList = new FileReader("fileName");
+//            BufferedReader bufferedReader = new BufferedReader(transactionList);
+//            transactions = new ArrayList<>();
+//
+//            String inputString;
+//
+//            while ((inputString = bufferedReader.readLine()) != null) {
+//
+//                transactions.add(transactionStringEncoded(inputString));
+//            }
+//
+//            return transactions;
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//
+//    }
+
+
+    private static void writeToLog() {
+
 
         try {
-            FileReader transactionList = new FileReader("transactions.csv");
-            BufferedReader bufferedReader = new BufferedReader(transactionList);
-            transactions = new ArrayList<>();
+            FileWriter transactionLog = new FileWriter(fileName, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(transactionLog);
 
-            String inputString;
-
-            while ((inputString = bufferedReader.readLine()) != null) {
-
-                transactions.add(transactionStringEncoded(inputString));
+            for (TransactionManager display : transactions) {
+                LocalDateTime today = LocalDateTime.now();
+                DateTimeFormatter iso =
+                        DateTimeFormatter.ofPattern("\nyyyy-MM-dd|HH:mm:ss a|");
+                String printedDate = today.format(iso);
+                String formattedTxt = printedDate + display.paymentCheck();
+                bufferedWriter.write(formattedTxt);
             }
-
-            return transactions;
-
+            bufferedWriter.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error: Could not save the Data");
         }
-
-
     }
 
 
-    //EncodeTransactions
-    private static TransactionManager transactionStringEncoded(String encodedFiles) {
+//    //EncodeTransactions
+//    private static TransactionManager transactionStringEncoded(String encodedFiles) {
+//
+//        String[] parts = encodedFiles.split(Pattern.quote("|"));
+//
+//        String vendor = parts[3];
+//        String description = parts[2];
+//        double amount = Double.parseDouble(parts[4]);
+//        boolean isPayment = Boolean.parseBoolean(parts[5]);
+//
+//        TransactionManager result = new TransactionManager(vendor, description, amount, isPayment);
+//
+//        return result;
+//
+//
+//    }
 
-        String[] parts = encodedFiles.split(Pattern.quote("|"));
+    //Make A deposit or Payment Method
+    private static void depositOrPaymentTransaction(boolean isPayment) {
+        String vendor = console.promptForString("Vendors Name?: ").trim();
+        String description = console.promptForString("Description of transaction: ").trim();
+        double amount = console.promptForDouble("Input the amount: ");
 
-        String vendor = parts[3];
-        String description = parts[2];
-        double amount = Double.parseDouble(parts[4]);
-        boolean isPayment = Boolean.parseBoolean(parts[5]);
-
-        TransactionManager result = new TransactionManager(vendor, description, amount, isPayment);
-
-        return result;
-
-
-    }
-
-    //Make A deposit Method
-    private static void makeADeposit() {
-
-        for(TransactionManager manager : transactions){
-            entireList.put(manager.getVendor(), manager);
-
-        }
-        String vendor = console.promptForString("Enter the Vendor's name for this deposit: ").trim();
-        String description = console.promptForString("Add a description of this deposit: ").trim();
-        double amount = console.promptForDouble("Input the money gained: ");
-
-//        TransactionManager manager = entireList.get();
+        TransactionManager format = new TransactionManager(vendor, description, amount, isPayment);
+        transactions.add(format);
+        writeToLog();
 
 
     }
 
     private static void displayAllTransactions() {
-        for (TransactionManager transaction : transactions) {
-            System.out.println(transaction.paymentCheck());
+        try {
+            FileReader displayAll = new FileReader(fileName);
+            BufferedReader bufferedReader = new BufferedReader(displayAll);
+            String next;
+            while ((next = bufferedReader.readLine()) != null) {
+                System.out.println(next);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
+
     }
 
 
