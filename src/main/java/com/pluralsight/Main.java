@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class Main {
     private static TransactionManager format;
     //FileName as variable
     private static String fileName = "transactions.csv";
-   
+
     //ArrayList
     private static ArrayList<TransactionManager> transactions = new ArrayList<>();
 
@@ -48,27 +49,32 @@ public class Main {
 
 
         do {
-            input = console.promptForString(home);
-            if (input.equalsIgnoreCase("D")) {
-                //Make A Deposit(payment will be false)
-                depositOrPaymentTransaction(false);
+            input = console.promptForString(home).trim();
+            switch (input.toUpperCase()) {
+                case "D":
+                    // Make A Deposit (payment will be false)
+                    depositOrPaymentTransaction(false);
+                    break;
 
-            } else if (input.equalsIgnoreCase("P")) {
-                //Make A Payment(payment will be true)
-                depositOrPaymentTransaction(true);
+                case "P":
+                    // Make A Payment (payment will be true)
+                    depositOrPaymentTransaction(true);
+                    break;
 
-            } else if (input.equalsIgnoreCase("L")) {
-                //GO to the Ledger Screen
+                case "L":
+                    // Go to the Ledger Screen
+                    ledgerScreen();
+                    break;
 
-            } else if (input.equalsIgnoreCase("Exit")) {
-                //Exiting...
+                case "EXIT":
+                    System.out.println("Exiting...");
+                    break;
 
-            } else {
-                System.out.println("Not A Valid Input, Please Type the Letters Indicated");
+                default:
+                    System.out.println("Not A Valid Input, Please Type the Letters Indicated");
+                    break;
             }
         } while (!input.equalsIgnoreCase("Exit"));
-
-    }
 
 
 //    //Make An Array List:
@@ -94,28 +100,29 @@ public class Main {
 //
 //
 //    }
+    }
 
 
-    private static void writeToLog() {
+        private static void writeToLog () {
 
 
-        try {
-            FileWriter transactionLog = new FileWriter(fileName, true);
-            BufferedWriter bufferedWriter = new BufferedWriter(transactionLog);
+            try {
+                FileWriter transactionLog = new FileWriter(fileName, true);
+                BufferedWriter bufferedWriter = new BufferedWriter(transactionLog);
 
-                TransactionManager lastTransactionOnly = transactions.get(transactions.size()-1);
+                TransactionManager lastTransactionOnly = transactions.get(transactions.size() - 1);
                 LocalDateTime today = LocalDateTime.now();
                 DateTimeFormatter iso =
                         DateTimeFormatter.ofPattern("\nyyyy-MM-dd|HH:mm:ss a|");
                 String printedDate = today.format(iso);
                 String formattedTxt = printedDate + lastTransactionOnly.paymentCheck();
                 bufferedWriter.write(formattedTxt);
-            
-            bufferedWriter.close();
-        } catch (IOException e) {
-            System.out.println("Error: Could not save the Data");
+
+                bufferedWriter.close();
+            } catch (IOException e) {
+                System.out.println("Error: Could not save the Data");
+            }
         }
-    }
 
 
 //    //EncodeTransactions
@@ -134,6 +141,7 @@ public class Main {
 //
 //
 //    }
+
 
     //Make A deposit or Payment Method
     private static void depositOrPaymentTransaction(boolean isPayment) {
@@ -164,14 +172,40 @@ public class Main {
     }
 
 
-
-
-
-
     //Make A Payment Method
 
 
     //Create A Ledger Screen
+    private static void ledgerScreen() {
+        String ledger = "Here are the following options\n " +
+                "A: Display all entries\n" +
+                "D: Deposits only \n" +
+                "P: Payments only\n" +
+                "R: Go To Reports page";
+
+        String choice;
+        do {
+
+            choice = console.promptForString(ledger);
+            switch (choice.toUpperCase()){
+                case "A": displayAllTransactions();
+                break;
+                case "D": //Deposits Only;
+                    break;
+                case "P"://Payments Only;
+                break;
+                case "R":// Go To Reports Page
+                break;
+                case "H":
+
+            }
+
+
+
+        }while (choice.equalsIgnoreCase("H"));
+
+
+    }
 
 
     //Display Every Entry inside of Transaction txt
@@ -183,26 +217,112 @@ public class Main {
     //Display ALl Payments
 
 
-    //GO TO The Report Screen
+    //Go To The Report Screen
+    public static void reportScreen(){
+        String reports = "This is the Report Screen\n" +
+                "1. Month To Date\n" +
+                "2. Previous Month\n" +
+                "3. Year To Date\n" +
+                "4. Previous Year\n" +
+                "5. Search by Vendor\n" +
+                "0. Go back to Ledger Screen\n" +
+                "Enter 0 - 5: ";
 
 
-    //Methods for Month To Day
+        int reportChoice;
+
+        do{
+            reportChoice = console.promptForInt(reports);
+            
 
 
-    //Methods for Previous Month
+        }
 
 
-    //Methods for Year To Date
+
+    }
 
 
-    //Methods for the Previous Year
+
+
+
+    //Methods DatesAndYears
+    public static void searchViaDatesAndYears(int dateFound) {
+        try {
+            FileReader displayDeposits = new FileReader(fileName);
+            BufferedReader bufferedReader = new BufferedReader(displayDeposits);
+
+            String search;
+            while ((search = bufferedReader.readLine()) != null) {
+                String[] yearAndMonthSplit = search.split(Pattern.quote("|"));
+
+
+                LocalDate startOfTheMonth = LocalDate.of(2025, 4, 1);
+                LocalDate today = LocalDate.now();
+
+                LocalDate startOfTheLastMonth = LocalDate.of(2025, 3, 1);
+
+                LocalDate endOfLastMonth = LocalDate.of(2025, 3, 31);
+
+
+                LocalDate startOfTheYear = LocalDate.of(2025, 1, 1);
+                //LocalDate today = LocalDate.now();
+
+
+                LocalDate startOfLastYear = LocalDate.of(2024, 1, 1);
+                LocalDate EndOfTheLastYear = LocalDate.of(2024, 12, 31);
+
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+
+                LocalDate splitTheDates = LocalDate.parse(yearAndMonthSplit[0], formatter);
+
+
+                switch (dateFound) {
+                    case 1: //Start of the Month to Today
+                        if (!splitTheDates.isBefore(startOfTheMonth) && !splitTheDates.isAfter(today)) {
+
+                            System.out.println(search);
+
+                        }
+                        break;
+                    case 2: //The start of last Month to End of Last Month
+                        if (!splitTheDates.isBefore(startOfTheLastMonth) && !splitTheDates.isAfter(endOfLastMonth)) {
+                            System.out.println(search);
+
+                        }
+                        break;
+                    case 3://The start of the Year to Today
+                        if (!splitTheDates.isBefore(startOfTheYear) && !splitTheDates.isAfter(today)) {
+                            System.out.println(search);
+
+                        }
+                        break;
+                    case 4: //The start of Last Year til the end of Last Year
+                        if (!splitTheDates.isBefore(startOfLastYear) && !splitTheDates.isAfter(EndOfTheLastYear)) {
+                            System.out.println(search);
+
+                        }
+                        break;
+
+
+                }
+
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
 
     //Ability to Search Via Typing in the Vendor
 
 
     //Format the time and dates to the log using TransactionManager Class
-
 
 
     // Display The Format For The Time and Dates to the Console itself

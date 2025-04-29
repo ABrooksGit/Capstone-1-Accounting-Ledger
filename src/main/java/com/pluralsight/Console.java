@@ -65,7 +65,7 @@ public class Console {
 
     public String promptForString(String prompt){
         System.out.print(prompt);
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
 
 
     }
