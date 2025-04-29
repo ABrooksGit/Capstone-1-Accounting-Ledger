@@ -103,14 +103,14 @@ public class Main {
             FileWriter transactionLog = new FileWriter(fileName, true);
             BufferedWriter bufferedWriter = new BufferedWriter(transactionLog);
 
-            for (TransactionManager display : transactions) {
+                TransactionManager lastTransactionOnly = transactions.get(transactions.size()-1);
                 LocalDateTime today = LocalDateTime.now();
                 DateTimeFormatter iso =
                         DateTimeFormatter.ofPattern("\nyyyy-MM-dd|HH:mm:ss a|");
                 String printedDate = today.format(iso);
-                String formattedTxt = printedDate + display.paymentCheck();
+                String formattedTxt = printedDate + lastTransactionOnly.paymentCheck();
                 bufferedWriter.write(formattedTxt);
-            }
+            
             bufferedWriter.close();
         } catch (IOException e) {
             System.out.println("Error: Could not save the Data");
