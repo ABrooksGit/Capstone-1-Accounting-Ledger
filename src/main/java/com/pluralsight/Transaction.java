@@ -87,6 +87,7 @@ public class Transaction {
 
 
     public String showSpecificValues(){
+
         return String.format("%s|%s|%s|%s|%.2f", this.date, this.time, this.description, this.vendor, this.amount);
 
 

@@ -2,6 +2,7 @@ package com.pluralsight;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -9,29 +10,31 @@ import java.util.regex.Pattern;
 
 
 public class Main {
-    /////////////////////////////////////////////////////////////////////////////////////////////
+    /// //////////////////////////////////////////////////////////////////////////////////////////
     //Console Class
     private static Console console = new Console();
     //Transaction Manager Class
-            //    private static Transaction format;
+    //    private static Transaction format;
     //FileName as variable
     private static String fileName = "transactions.csv";
     //ArrayList
     private static ArrayList<Transaction> transactions = new ArrayList<>();
 
-//    private static ColorCodes colorCodes;
 
-    ///////////////////////////////////////////////////////////////////////////////////////////
+    /// ////////////////////////////////////////////////////////////////////////////////////////
 
     public static void main(String[] args) {
         //Loads the Transactions from the csv file.
-        getAllTransactions();
+        //option 1
+//        getAllTransactions();
+
+        //option 2
+        transactions = getAllTransactionsOpt2();
 
 
         //Loads the Home Screen
         homeScreen();
     }
-
 
 
     //EncodeTransactions
@@ -49,42 +52,64 @@ public class Main {
         LocalDate date = LocalDate.parse(dateString);
         LocalTime time = LocalTime.parse(timeString);
 
-        return new Transaction(date, time,  description, vendor, amount);
+        return new Transaction(date, time, description, vendor, amount);
 
     }
 
 
     //Make An Array List of all transactions:
-    private static ArrayList<Transaction> getAllTransactions() {
+//    private static void getAllTransactions() {
+//
+//        try {
+//            FileReader transactionList = new FileReader(fileName);
+//            BufferedReader bufferedReader = new BufferedReader(transactionList);
+//            transactions = new ArrayList<>();
+//
+//            String inputString;
+//
+//            while ((inputString = bufferedReader.readLine()) != null) {
+//                //if the CSV file has A empty space, move past it and then continue
+//                if (inputString.trim().isEmpty()) {
+//                    continue;
+//                }
+//
+//                transactions.add(transactionStringEncoded(inputString));
+//
+//            }
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
+
+    //Make An Array List of all transactions:
+    private static ArrayList<Transaction> getAllTransactionsOpt2() {
+        ArrayList<Transaction> result = new ArrayList<Transaction>();
 
         try {
             FileReader transactionList = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(transactionList);
-            transactions = new ArrayList<>();
 
             String inputString;
 
             while ((inputString = bufferedReader.readLine()) != null) {
                 //if the CSV file has A empty space, move past it and then continue
-                if(inputString.trim().isEmpty()){
+                if (inputString.trim().isEmpty()) {
                     continue;
                 }
 
-                transactions.add(transactionStringEncoded(inputString));
+                result.add(transactionStringEncoded(inputString));
 
             }
-
-
-
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        return transactions;
+        return result;
 
     }
-
 
 
     //Home Screen Method
@@ -129,8 +154,6 @@ public class Main {
     }
 
 
-
-
     //Writing to the csv file
     private static void writeToLog() {
 
@@ -152,7 +175,6 @@ public class Main {
     }
 
 
-
     //Make A deposit or Payment Method
     private static void depositOrPaymentTransaction(boolean isPayment) {
 
@@ -171,9 +193,6 @@ public class Main {
         Transaction format = new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount);
         transactions.add(format);
         writeToLog();
-
-
-
 
     }
 
@@ -225,9 +244,9 @@ public class Main {
     //Display Deposits and Payments
     private static void displayAllTransactions() {
 
-        for (Transaction t : transactions){
-            if(t.showSpecificValues().equalsIgnoreCase(t.showSpecificValues())){
-                System.out.println(t.showSpecificValues());
+        for (Transaction t : transactions) {
+            if (t.showSpecificValues().equalsIgnoreCase(t.showSpecificValues())) {
+                System.out.println(t.getFormattedTransaction());
             }
         }
 
@@ -250,8 +269,6 @@ public class Main {
                 }
             }
         }
-
-
 
     }
 
@@ -299,7 +316,6 @@ public class Main {
             }
         } while (reportChoice != 0);
 
-
     }
 
 
@@ -313,21 +329,31 @@ public class Main {
             while ((search = bufferedReader.readLine()) != null) {
                 String[] yearAndMonthSplit = search.split(Pattern.quote("|"));
 
-
-                LocalDate startOfTheMonth = LocalDate.of(2025, 4, 1);
                 LocalDate today = LocalDate.now();
+                int currentMonth = today.getMonthValue();
+                int startOfMonth = today.withDayOfMonth(1).getDayOfMonth();
+                int firstDayOfMonth = 1;
+                int lastDayOfTheYear = 31;
+                int endOfTheLastMonth = today.minusMonths(1).lengthOfMonth();
+                int currentYear = today.getYear();
+                int thisMonthBegin = today.getDayOfMonth();
+                int lastYear = currentYear - 1;
+                int lastMonth = currentMonth - 1;
+                if (lastMonth < 1) lastMonth = 12;
 
-                LocalDate startOfTheLastMonth = LocalDate.of(2025, 3, 1);
+                LocalDate startOfTheMonth = LocalDate.of(currentYear, currentMonth, startOfMonth);
 
-                LocalDate endOfLastMonth = LocalDate.of(2025, 3, 31);
+                LocalDate startOfTheLastMonth = LocalDate.of(currentYear, lastMonth, firstDayOfMonth);
+
+                LocalDate endOfLastMonth = LocalDate.of(currentYear, lastMonth, endOfTheLastMonth);
 
 
-                LocalDate startOfTheYear = LocalDate.of(2025, 1, 1);
+                LocalDate startOfTheYear = LocalDate.of(currentYear, Month.JANUARY.getValue(), thisMonthBegin);
                 //LocalDate today = LocalDate.now();
 
 
-                LocalDate startOfLastYear = LocalDate.of(2024, 1, 1);
-                LocalDate EndOfTheLastYear = LocalDate.of(2024, 12, 31);
+                LocalDate startOfLastYear = LocalDate.of(lastYear, Month.JANUARY.getValue(), firstDayOfMonth);
+                LocalDate EndOfTheLastYear = LocalDate.of(lastYear, Month.DECEMBER.getValue(), lastDayOfTheYear);
 
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -379,7 +405,7 @@ public class Main {
         String findVendor = console.promptForString("Vendor: ");
         for (Transaction t : transactions) {
             if (t.getVendor().equalsIgnoreCase(findVendor)) {
-                System.out.println(t.showSpecificValues());
+                System.out.println(t.getFormattedTransaction());
             }
         }
     }
@@ -440,20 +466,20 @@ public class Main {
                 startDate = LocalDate.parse(startDateInput);
             }
 
-        }catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             System.out.println("Incorrect Date format Please use correct format next time..Skipping");
         }
 
         // Prompts the user for the end date
         String endDateInput = console.promptForString("Enter end date (YYYY-MM-DD): ");
         LocalDate endDate = null;
-       try {
-           if (!endDateInput.isEmpty()) {
-               endDate = LocalDate.parse(endDateInput);
-           }
-       }catch (DateTimeParseException e){
-           System.out.println("Incorrect Date format Please use correct format next time..Skipping");
-       }
+        try {
+            if (!endDateInput.isEmpty()) {
+                endDate = LocalDate.parse(endDateInput);
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println("Incorrect Date format Please use correct format next time..Skipping");
+        }
 
         // Prompts the user for description
         String description = console.promptForString("Enter description: ");
@@ -483,9 +509,12 @@ public class Main {
 
         // Display the Custom Search
         for (Transaction t : filteredTransactions) {
-            System.out.println(t.showSpecificValues());
+            System.out.println(t.getFormattedTransaction());
         }
     }
+
+}
+
 
 
 // Ability to Search Via Typing in the Vendor(old version without ArrayList)
@@ -517,4 +546,4 @@ public class Main {
 //    }
 
 
-}
+
