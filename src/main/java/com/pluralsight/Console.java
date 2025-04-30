@@ -55,6 +55,7 @@ public class Console {
             try {
                 System.out.print(prompt);
                 result = scanner.nextDouble();
+                scanner.nextLine();
                 return result;
             } catch (Exception e) {
                 System.out.println("Not a valid input, please enter a valid double.");

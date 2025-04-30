@@ -1,158 +1,139 @@
-2023-01-06|09:45|Grocery shopping|Whole Foods|-87.34
-2023-01-10|15:20|Monthly salary|Acme Corp|3200.00
-2023-01-15|11:12|Electric bill payment|City Utilities|-120.50
-2023-01-20|13:30|Freelance payment|Upwork|450.00
-2023-01-23|08:17|Coffee|Starbucks|-5.60
-2023-02-01|14:05|Internet bill|Comcast|-89.99
-2023-02-08|17:43|Sold old furniture|Facebook Marketplace|180.00
-2023-02-12|10:21|Lunch with friends|Chipotle|-23.75
-2023-02-19|12:55|Tax refund|IRS|640.00
-2023-02-27|07:30|Gasoline|Chevron|-48.12
-2023-03-05|18:50|Concert ticket|Ticketmaster|-120.00
-2023-03-11|20:40|Gift received|Family|200.00
-2023-03-18|09:05|Monthly salary|Acme Corp|3200.00
-2023-03-21|15:33|Online shopping|Amazon|-76.88
-2023-03-25|13:15|Phone bill|Verizon|-98.45
-2023-04-01|08:50|Grocery shopping|Trader Joe's|-65.23
-2023-04-06|11:35|Freelance payment|Fiverr|300.00
-2023-04-10|14:25|Dining out|Olive Garden|-34.90
-2023-04-14|16:00|Streaming service|Netflix|-15.99
-2023-04-20|09:10|Car maintenance|Jiffy Lube|-245.70
-2023-04-26|12:40|Cashback reward|Credit Card|25.00
-2023-05-02|10:50|Grocery shopping|Costco|-112.00
-2023-05-08|19:30|Sold bicycle|Craigslist|150.00
-2023-05-15|13:10|Monthly salary|Acme Corp|3200.00
-2023-05-21|09:55|Electric bill payment|City Utilities|-124.80
-2023-05-27|17:20|Clothing purchase|Gap|-89.00
-2023-06-01|11:25|Phone bill|Verizon|-96.32
-2023-06-06|14:45|Interest received|Bank|12.15
-2023-06-13|18:00|Groceries|Safeway|-73.68
-2023-06-19|08:35|Monthly salary|Acme Corp|3200.00
-2023-07-01|09:10|Rent payment|Landlord|-1450.00
-2023-07-03|12:45|Grocery shopping|Kroger|-89.60
-2023-07-07|16:30|Dining out|Red Lobster|-47.80
-2023-07-14|08:00|Monthly salary|Acme Corp|3200.00
-2023-07-18|19:50|Streaming service|Spotify|-9.99
-2023-07-22|10:15|Gift sent|Venmo|-50.00
-2023-07-28|14:35|Gasoline|Shell|-52.30
-2023-08-02|13:25|Phone bill|Verizon|-98.70
-2023-08-08|15:40|Freelance payment|Toptal|500.00
-2023-08-14|08:00|Monthly salary|Acme Corp|3200.00
-2023-08-19|17:10|Home supplies|Home Depot|-132.45
-2023-08-24|09:30|Coffee|Starbucks|-6.10
-2023-08-30|11:20|Online sale|eBay|75.00
-2023-09-05|18:10|Grocery shopping|Trader Joe's|-94.22
-2023-09-11|20:00|Streaming service|HBO Max|-14.99
-2023-09-14|08:00|Monthly salary|Acme Corp|3200.00
-2023-09-17|10:45|Dining out|Chili's|-38.60
-2023-09-21|12:10|Car insurance|GEICO|-210.00
-2023-09-26|13:50|Pet supplies|PetSmart|-67.35
-2023-10-03|09:05|Grocery shopping|Walmart|-84.77
-2023-10-10|08:00|Monthly salary|Acme Corp|3200.00
-2023-10-16|16:40|Gasoline|Chevron|-49.90
-2023-10-20|18:25|Refund received|Amazon|45.00
-2023-10-25|10:30|Phone bill|Verizon|-99.15
-2023-11-01|13:10|Electric bill|City Utilities|-118.40
-2023-11-09|08:00|Monthly salary|Acme Corp|3200.00
-2023-11-14|17:35|Online shopping|Etsy|-62.88
-2023-11-22|19:10|Dinner out|Applebee's|-41.75
-2023-12-01|11:50|Grocery shopping|Safeway|-91.33
-2023-12-08|08:00|Monthly salary|Acme Corp|3200.00
-2023-12-15|10:10|Christmas gift|Amazon|-124.00
-2024-01-03|10:15|Grocery shopping|Whole Foods|-95.50
-2024-01-08|13:30|Monthly salary|Acme Corp|3300.00
-2024-01-12|16:45|Electric bill payment|City Utilities|-125.75
-2024-01-18|14:00|Freelance payment|Upwork|550.00
-2024-01-22|09:20|Coffee|Starbucks|-6.80
-2024-02-02|11:30|Internet bill|Comcast|-92.40
-2024-02-07|17:00|Sold old electronics|Facebook Marketplace|200.00
-2024-02-13|12:10|Lunch with friends|Chipotle|-25.60
-2024-02-19|08:00|Tax refund|IRS|700.00
-2024-02-24|10:30|Gasoline|Chevron|-51.20
-2024-03-03|19:00|Concert ticket|Ticketmaster|-130.00
-2024-03-08|20:30|Gift received|Family|250.00
-2024-03-14|09:00|Monthly salary|Acme Corp|3300.00
-2024-03-20|15:00|Online shopping|Amazon|-85.90
-2024-03-25|13:00|Phone bill|Verizon|-102.50
-2024-04-01|08:30|Grocery shopping|Trader Joe's|-70.40
-2024-04-05|11:00|Freelance payment|Fiverr|350.00
-2024-04-10|14:00|Dining out|Olive Garden|-38.20
-2024-04-15|16:30|Streaming service|Netflix|-17.50
-2024-04-20|09:00|Car maintenance|Jiffy Lube|-255.00
-2024-04-25|12:00|Cashback reward|Credit Card|30.00
-2024-05-02|10:00|Grocery shopping|Costco|-120.00
-2024-05-08|19:00|Sold bicycle|Craigslist|160.00
-2024-05-14|13:00|Monthly salary|Acme Corp|3300.00
-2024-05-19|09:30|Electric bill payment|City Utilities|-130.00
-2024-05-24|17:00|Clothing purchase|Gap|-95.00
-2024-06-01|11:00|Phone bill|Verizon|-100.00
-2024-06-06|14:00|Interest received|Bank|15.00
-2024-06-12|18:00|Groceries|Safeway|-80.00
-2024-06-18|08:30|Monthly salary|Acme Corp|3300.00
-2024-06-22|13:00|Online sale|eBay|90.00
-2024-07-01|09:00|Rent payment|Landlord|-1500.00
-2024-07-05|12:00|Grocery shopping|Kroger|-95.00
-2024-07-10|15:00|Dining out|Red Lobster|-50.00
-2024-07-15|08:00|Monthly salary|Acme Corp|3300.00
-2024-07-20|19:00|Streaming service|Spotify|-10.00
-2024-08-01|10:05|Phone bill|Verizon|-101.25
-2024-08-06|14:50|Freelance payment|Toptal|600.00
-2024-08-12|08:00|Monthly salary|Acme Corp|3300.00
-2024-08-17|17:40|Home supplies|Home Depot|-140.35
-2024-08-23|09:20|Coffee|Starbucks|-6.50
-2024-08-28|11:10|Online sale|eBay|80.00
-2024-09-03|18:15|Grocery shopping|Trader Joe's|-99.80
-2024-09-09|08:00|Monthly salary|Acme Corp|3300.00
-2024-09-14|19:20|Streaming service|HBO Max|-16.99
-2024-09-20|10:25|Dining out|Chili's|-40.45
-2024-09-25|12:35|Car insurance|GEICO|-220.00
-2024-09-30|13:15|Pet supplies|PetSmart|-72.90
-2024-10-04|09:30|Grocery shopping|Walmart|-88.25
-2024-10-10|08:00|Monthly salary|Acme Corp|3300.00
-2024-10-15|15:30|Gasoline|Chevron|-53.10
-2024-10-20|18:00|Refund received|Amazon|50.00
-2024-10-26|10:45|Phone bill|Verizon|-102.80
-2024-11-01|13:20|Electric bill|City Utilities|-128.60
-2024-11-07|08:00|Monthly salary|Acme Corp|3300.00
-2024-11-12|16:10|Online shopping|Etsy|-68.95
-2024-11-18|19:40|Dinner out|Applebee's|-44.60
-2024-11-25|09:55|Grocery shopping|Safeway|-93.70
-2024-12-02|11:30|Streaming service|Disney+|-13.99
-2024-12-08|08:00|Monthly salary|Acme Corp|3300.00
-2024-12-14|10:20|Christmas shopping|Amazon|-135.00
-2024-12-19|15:10|Freelance payment|Upwork|520.00
-2024-12-22|17:00|Gift received|Friend|100.00
-2024-12-26|12:45|Clothing purchase|Uniqlo|-84.50
-2024-12-29|10:00|Phone bill|Verizon|-103.45
-2024-12-31|09:00|New Year's party|Eventbrite|-60.00
-2025-01-02|10:10|Brunch split with Sarah|Venmo|-22.50
-2025-01-05|09:30|Monthly salary|Acme Corp|3400.00
-2025-01-07|14:45|Reimbursed for movie tickets|Jake|15.00
-2025-01-11|12:20|Electric bill payment|City Utilities|-130.80
-2025-01-15|17:30|Sent birthday gift|Emma|-40.00
-2025-01-19|08:40|Coffee run for team|Starbucks|-18.30
-2025-01-22|13:05|Shared Uber to concert|CashApp|-14.75
-2025-01-27|11:55|Internet bill|Comcast|-94.20
-2025-02-01|18:00|Dinner out|The Local Grill|-48.60
-2025-02-04|15:25|Paid back for snacks|Leo|-8.00
-2025-02-06|08:00|Monthly salary|Acme Corp|3400.00
-2025-02-10|16:45|Sold extra concert ticket|Anna|90.00
-2025-02-13|13:15|Valentine's flowers|BloomsyBox|-55.00
-2025-02-18|09:35|Gasoline|Chevron|-56.20
-2025-02-21|11:50|Streaming service|Netflix|-17.50
-2025-02-25|14:10|Grocery run for shared dinner|Trader Joe's|-62.45
-2025-03-01|10:30|Rent split received|Roommate|750.00
-2025-03-04|08:00|Monthly salary|Acme Corp|3400.00
-2025-03-07|17:00|Phone bill|Verizon|-104.15
-2025-03-11|19:20|Reimbursed for pizza night|Group Chat|25.00
-2025-03-15|12:40|Lunch treat for Sam|Panera Bread|-29.00
-2025-03-19|14:55|Loan repayment from Mike|Zelle|120.00
-2025-03-23|11:30|Clothing purchase|Zara|-88.90
-2025-03-27|10:20|Spotify family plan|Spotify|-10.99
-2025-04-01|15:00|Covered cab ride|Venmo|-19.80
-2025-04-05|08:00|Monthly salary|Acme Corp|3400.00
-2025-04-09|10:50|Dinner split|CashApp|-33.30
-2025-04-13|12:15|Easter gift for parents|Amazon|-45.00
-2025-04-18|09:00|Refund from overpaid utilities|City Utilities|28.00
-2025-04-24|14:35|Grocery shopping|Safeway|-97.60
-2025-04-30|16:45|Interest received|Bank|22.50
+2023-01-07|10:13:25|Grocery shopping|Whole Foods|-125.45
+2023-01-15|14:22:03|Monthly rent|Sunrise Apartments|-1450.00
+2023-01-20|09:05:11|Paycheck deposit|Acme Corp|2450.00
+2023-01-22|16:45:33|Dinner with friends|Olive Garden|-82.30
+2023-02-02|08:10:57|Freelance payment|Fiverr Client|320.00
+2023-02-10|12:30:44|Gift for Sarah's birthday|Amazon|-45.99
+2023-02-14|19:00:12|Valentine's dinner|Chez Pierre|-120.75
+2023-02-28|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-03-05|15:28:19|Concert tickets|Ticketmaster|-210.00
+2023-03-08|13:17:01|Loan repayment|Marcus by Goldman Sachs|-300.00
+2023-03-14|11:22:33|Coffee meeting|Starbucks|-9.80
+2023-03-22|17:40:00|Freelance payment|Upwork Client|450.00
+2023-03-30|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-04-04|14:05:09|Car repair|Joe's Auto Shop|-685.50
+2023-04-10|10:45:21|Tax refund|IRS|879.00
+2023-04-15|18:30:45|Dinner with Alex|Local Bistro|-67.00
+2023-04-25|09:55:32|Dog grooming|Paw Palace|-95.00
+2023-04-30|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-05-03|12:14:20|Charity donation|Red Cross|-100.00
+2023-05-07|20:33:11|Concert snacks|Venue Vendor|-32.75
+2023-05-15|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-06-01|13:02:59|Father’s Day gift|Etsy Shop|-52.30
+2023-06-10|09:44:08|Medical checkup|City Clinic|-200.00
+2023-06-15|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-06-25|19:55:42|Weekend getaway|Airbnb Host|-312.40
+2023-07-01|08:15:36|Electric bill|City Utilities|-98.60
+2023-07-10|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-07-16|14:20:11|Barbecue with friends|Local Butcher|-64.90
+2023-07-23|16:50:00|Birthday gift from grandma|Grandma|200.00
+2023-07-30|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-08-03|09:10:05|Gym membership renewal|Anytime Fitness|-299.99
+2023-08-10|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-08-15|18:45:33|Night out with coworkers|BrewHouse Bar|-76.20
+2023-08-21|07:25:18|Car insurance payment|Geico Insurance|-180.00
+2023-08-30|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-09-04|11:33:47|Labor Day BBQ supplies|Costco|-124.55
+2023-09-10|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-09-19|13:50:00|Streaming subscription|Netflix|-15.49
+2023-09-28|16:20:14|Birthday dinner for mom|Italian Kitchen|-110.00
+2023-09-30|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-10-03|12:22:39|New phone|Apple Store|-999.99
+2023-10-10|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-10-15|17:18:55|Halloween costume|Party City|-65.30
+2023-10-22|08:44:20|Photography gig payment|Private Client|375.00
+2023-10-31|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-11-05|09:18:40|Grocery haul|Trader Joe’s|-141.60
+2023-11-10|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-11-14|11:12:19|Dinner with cousin Sam|The Grillhouse|-88.70
+2023-11-23|18:03:29|Thanksgiving groceries|Walmart|-134.90
+2023-11-30|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-12-01|14:40:51|Holiday decorations|Target|-72.45
+2023-12-07|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2023-12-12|13:00:00|Secret Santa gift|Etsy|-35.00
+2023-12-20|19:10:45|Holiday dinner|The Copper Spoon|-125.00
+2023-12-22|09:55:30|Bonus deposit|Acme Corp|500.00
+2023-12-24|21:45:15|Gift for partner|Nordstrom|-200.00
+2023-12-30|10:13:25|Paycheck deposit|Acme Corp|2450.00
+2024-01-05|11:20:30|Loaned money to George|George Miller|-300.00
+2024-01-10|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-01-14|16:44:10|Dinner with college friends|The Tap House|-92.15
+2024-01-20|09:50:23|Received repayment from George|George Miller|300.00
+2024-01-30|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-02-02|13:02:11|Sold old bike|Brian Lee|150.00
+2024-02-09|14:32:57|Sent birthday money to cousin|Emma Fields|-100.00
+2024-02-15|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-02-18|19:20:00|Valentine's gift|Urban Outfitters|-76.00
+2024-02-28|11:40:14|Shared Uber fare|Alex Martinez|-22.50
+2024-03-01|13:05:33|Dog walking gig|Megan Cruz|75.00
+2024-03-10|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-03-15|17:30:40|Split dinner bill|Sophia Lin|-48.90
+2024-03-20|09:13:47|Received cash for helping move|David King|60.00
+2024-03-31|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-04-05|15:18:25|Loaned brother gas money|Liam Carter|-50.00
+2024-04-10|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-04-14|08:45:12|Co-paid birthday gift|Elena Torres|-40.00
+2024-04-22|12:30:00|Refund from returned item|Target|28.99
+2024-04-30|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-05-03|10:22:50|Grocery run for mom|Whole Foods|-98.30
+2024-05-10|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-05-18|18:15:17|Repayment for concert tickets|Noah Barnes|110.00
+2024-05-27|14:07:11|Sent money for group gift|Wedding Fundraiser|-65.00
+2024-05-31|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-06-06|12:40:44|Helped with garden work|Grandma|50.00
+2024-06-10|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-06-16|16:45:30|Bought snacks for road trip|7-Eleven|-27.85
+2024-06-21|11:55:00|Shared Airbnb cost|Chris Nguyen|-142.00
+2024-06-30|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-07-03|10:08:55|Loaned gas money to Ashley|Ashley Rivera|-40.00
+2024-07-10|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-07-12|13:22:40|Paid back by Ashley|Ashley Rivera|40.00
+2024-07-17|19:33:10|Dinner at the lake house|Group Potluck|-33.25
+2024-07-30|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-08-04|14:44:29|Sold extra concert ticket|Jake Thomas|120.00
+2024-08-10|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-08-14|18:00:00|Groceries and snacks|Trader Joe’s|-108.20
+2024-08-19|11:15:20|Contributed to group dinner|Olivia Reed|-45.00
+2024-08-30|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-09-03|09:35:11|Gifted money to nephew for school|Dylan Morgan|-75.00
+2024-09-10|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-09-18|16:18:00|Repayment from Dylan|Dylan Morgan|75.00
+2024-09-26|13:27:50|Baked goods for charity event|Local Bake Sale|-20.00
+2024-09-30|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-10-05|15:12:42|Paid for weekend camping trip|Campgrounds Online|-132.75
+2024-10-10|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-10-14|17:45:09|Bought movie tickets for group|AMC Theaters|-56.00
+2024-10-22|20:10:55|Shared cost of Halloween party|Maya Bennett|-48.50
+2024-10-31|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-11-02|08:45:18|Babysitting payment|Claire Wilson|80.00
+2024-11-10|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-11-16|12:11:00|Thanksgiving groceries|Safeway|-137.20
+2024-11-23|14:34:50|Gave grandma cash for holiday shopping|Grandma|-100.00
+2024-11-30|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-12-04|13:29:17|Sold handmade candles|Etsy Store|90.00
+2024-12-10|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2024-12-14|15:40:00|Holiday party contribution|Work Holiday Fund|-60.00
+2024-12-20|11:05:03|Year-end bonus|Acme Corp|1000.00
+2024-12-24|19:15:30|Gave mom holiday gift money|Mom|-200.00
+2024-12-30|10:13:25|Paycheck deposit|Acme Corp|2500.00
+2025-01-02|08:45:12|New Year's brunch|The Morning Spoon|-48.20
+2025-01-05|14:23:34|Gave Julian money for textbooks|Julian Park|-120.00
+2025-01-10|10:13:25|Paycheck deposit|Acme Corp|2600.00
+2025-01-16|12:35:01|Received repayment from Julian|Julian Park|120.00
+2025-01-25|09:10:47|Monthly groceries|Whole Foods|-132.60
+2025-01-30|10:13:25|Paycheck deposit|Acme Corp|2600.00
+2025-02-04|13:14:50|Helped friend move|Tom Delgado|60.00
+2025-02-10|10:13:25|Paycheck deposit|Acme Corp|2600.00
+2025-02-14|18:00:00|Valentine’s dinner|Le Petit Jardin|-98.00
+2025-02-22|10:00:32|Gifted cousin for engagement|Hannah Lopez|-150.00
+2025-02-28|10:13:25|Paycheck deposit|Acme Corp|2600.00
+2025-03-03|11:45:00|Split weekend ski trip cost|Lucas Tran|-180.00
+2025-03-10|10:13:25|Paycheck deposit|Acme Corp|2600.00
+2025-03-12|15:20:17|Sold used books|Taylor Craig|35.00
+2025-03-19|17:33:42|Birthday gift for dad|Amazon|-74.99
+2025-03-30|10:13:25|Paycheck deposit|Acme Corp|2600.00
+2025-04-02|09:59:31|Dog sitting payment|Eva Monroe|85.00
+2025-04-10|10:13:25|Paycheck deposit|Acme Corp|2600.00
+2025-04-14|13:22:10|Gave friend money for road trip|Nina Patel|-90.00
+2025-04-20|19:17:05|Repayment for road trip|Nina Patel|90.00
+2025-04-30|06:57:55|Paycheck deposit|Acme Corp|2600.00

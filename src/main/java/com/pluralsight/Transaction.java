@@ -7,13 +7,13 @@ public class Transaction {
 
     private LocalDate date;
     private LocalTime time;
-    private String vendor;
     private String description;
+    private String vendor;
     private double amount;
 
 
 
-    public Transaction(LocalDate date, LocalTime time, String vendor, String description, double amount) {
+    public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount) {
         this.date = date;
         this.time = time;
         this.vendor = vendor;

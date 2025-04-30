@@ -12,7 +12,7 @@ public class Main {
     //Console Class
     private static Console console = new Console();
     //Transaction Manager Class
-    private static Transaction format;
+//    private static Transaction format;
     //FileName as variable
     private static String fileName = "transactions.csv";
     //ArrayList
@@ -21,28 +21,26 @@ public class Main {
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     public static void main(String[] args) {
-
         //Loads the Transactions from the csv file.
         getAllTransactions();
 
 
         //Loads the Home Screen
         homeScreen();
-
-
     }
 
 
     //Home Screen Method
     private static void homeScreen() {
-        //Beginning Prompt:
-        String home = "Welcome to the Accounting Ledger\n" +
-                "Here are your options:\n" +
-                "D: Add A Deposit\n" +
-                "P: Make A Payment\n" +
-                "L: Go to the Ledger Screen\n" +
-                "Exit: Exit the Application\n" +
-                "Type Any of the Above Letters or Exit: ";
+        String home = """
+                
+                Welcome to the Accounting Ledger:
+                D: Add A Deposit
+                P: Make A Payment
+                L: Go to the Ledger Screen
+                Exit: Exit the Application
+                
+                Enter Any of these letters or type Exit:\s""";
 
 
         // Using A String to type each letter and inputting it into the console class for the scanner.
@@ -51,6 +49,7 @@ public class Main {
         do {
             input = console.promptForString(home);
             switch (input.toUpperCase()) {
+
                 case "D":
                     // Make A Deposit (payment will be false)
                     depositOrPaymentTransaction(false);
@@ -70,14 +69,11 @@ public class Main {
                 case "EXIT":
                     System.out.println("Exiting...");
                     break;
-
-                default:
-                    System.out.println("Not A Valid Input, Please Type the Letters Indicated Above");
-                    break;
             }
         } while (!input.equalsIgnoreCase("Exit"));
-
     }
+
+
 
 
     //Make An Array List of all transactions:
@@ -91,9 +87,16 @@ public class Main {
             String inputString;
 
             while ((inputString = bufferedReader.readLine()) != null) {
+                //if the CSV file has A empty space, move past it and then continue
+                if(inputString.trim().isEmpty()){
+                    continue;
+                }
 
                 transactions.add(transactionStringEncoded(inputString));
+
             }
+
+
 
 
         } catch (IOException e) {
@@ -134,7 +137,7 @@ public class Main {
             BufferedWriter bufferedWriter = new BufferedWriter(transactionLog);
 
             //Only writes the latest addition
-            Transaction lastTransactionOnly = transactions.get(transactions.size() - 1);
+            Transaction lastTransactionOnly = transactions.getLast();
 
             String formattedTxt = lastTransactionOnly.getFormattedTransaction();
             bufferedWriter.write("\n" + formattedTxt);
@@ -149,7 +152,7 @@ public class Main {
     //Make A deposit or Payment Method
     private static void depositOrPaymentTransaction(boolean isPayment) {
 
-        String description = console.promptForString("Description of transaction: ").trim();
+        String description = console.promptForString("\nDescription of transaction: ").trim();
         String vendor = console.promptForString("Vendors Name?: ").trim();
         double amount = console.promptForDouble("Input the amount: ");
 
@@ -162,21 +165,21 @@ public class Main {
         writeToLog();
 
 
+
+
     }
 
 
     //Display Deposits and Payments
     private static void displayAllTransactions() {
-        try {
-            FileReader displayAll = new FileReader(fileName);
-            BufferedReader bufferedReader = new BufferedReader(displayAll);
-            String next;
-            while ((next = bufferedReader.readLine()) != null) {
-                System.out.println(next);
+
+        for (Transaction t : transactions){
+            if(t.showSpecificValues().equalsIgnoreCase(t.showSpecificValues())){
+                System.out.println(t.showSpecificValues());
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
+
+
 
 
     }
@@ -184,13 +187,15 @@ public class Main {
 
     //Create A Ledger Screen
     private static void ledgerScreen() {
-        String ledger = "\nHere are the following options\n" +
-                "A: Display all entries\n" +
-                "D: Deposits only \n" +
-                "P: Payments only\n" +
-                "R: Go To Reports page\n" +
-                "H: Return to Home Screen\n" +
-                "Enter your choice: ";
+        String ledger = """
+                
+                Here are the following options
+                A: Display all entries
+                D: Deposits only\s
+                P: Payments only
+                R: Go To Reports page
+                H: Return to Home Screen
+                Enter your choice:\s""";
 
         String choice;
         do {
@@ -200,6 +205,7 @@ public class Main {
                 case "A":
                     displayAllTransactions(); // Shows both Deposits and Payments
                     break;
+
 
                 case "D": //Deposits Only;
                     displayTransactionOfChoice(false);
@@ -260,15 +266,18 @@ public class Main {
 
     //Go To The Report Screen
     public static void reportScreen() {
-        String reports = "\nThis is the Report Screen\n" +
-                "1. Month To Date\n" +
-                "2. Previous Month\n" +
-                "3. Year To Date\n" +
-                "4. Previous Year\n" +
-                "5. Search by Vendor\n" +
-                "6. Custom Search\n" +
-                "0. Go back to Ledger Screen\n" +
-                "Enter 0 - 6: ";
+        String reports = """
+                
+                This is the Report Screen
+                1. Month To Date
+                2. Previous Month
+                3. Year To Date
+                4. Previous Year
+                5. Search by Vendor
+                6. Custom Search
+                0. Go back to Ledger Screen
+                Enter 0 - 6:\s""";
+
 
         int reportChoice;
 
@@ -372,7 +381,6 @@ public class Main {
 
     }
 
-
     //Quick Search for Vendor
     private static void findVendor() {
         String findVendor = console.promptForString("Vendor: ");
@@ -382,6 +390,7 @@ public class Main {
             }
         }
     }
+
 
 
     //Creates a second ArrayList for the custom search functionality
