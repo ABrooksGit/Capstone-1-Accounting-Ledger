@@ -3,6 +3,7 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -12,11 +13,13 @@ public class Main {
     //Console Class
     private static Console console = new Console();
     //Transaction Manager Class
-//    private static Transaction format;
+            //    private static Transaction format;
     //FileName as variable
     private static String fileName = "transactions.csv";
     //ArrayList
     private static ArrayList<Transaction> transactions = new ArrayList<>();
+
+//    private static ColorCodes colorCodes;
 
     ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -30,50 +33,25 @@ public class Main {
     }
 
 
-    //Home Screen Method
-    private static void homeScreen() {
-        String home = """
-                
-                Welcome to the Accounting Ledger:
-                D: Add A Deposit
-                P: Make A Payment
-                L: Go to the Ledger Screen
-                Exit: Exit the Application
-                
-                Enter Any of these letters or type Exit:\s""";
+
+    //EncodeTransactions
+    private static Transaction transactionStringEncoded(String encodedFiles) {
+
+        String[] parts = encodedFiles.split(Pattern.quote("|"));
+
+        String dateString = parts[0];
+        String timeString = parts[1];
+        String description = parts[2];
+        String vendor = parts[3];
+        double amount = Double.parseDouble(parts[4]);
 
 
-        // Using A String to type each letter and inputting it into the console class for the scanner.
-        String input;
+        LocalDate date = LocalDate.parse(dateString);
+        LocalTime time = LocalTime.parse(timeString);
 
-        do {
-            input = console.promptForString(home);
-            switch (input.toUpperCase()) {
+        return new Transaction(date, time,  description, vendor, amount);
 
-                case "D":
-                    // Make A Deposit (payment will be false)
-                    depositOrPaymentTransaction(false);
-                    break;
-
-                case "P":
-                    // Make A Payment (payment will be true)
-                    depositOrPaymentTransaction(true);
-                    break;
-
-                case "L":
-                    // Go to the Ledger Screen
-                    ledgerScreen();
-                    break;
-
-                //Quits the application
-                case "EXIT":
-                    System.out.println("Exiting...");
-                    break;
-            }
-        } while (!input.equalsIgnoreCase("Exit"));
     }
-
-
 
 
     //Make An Array List of all transactions:
@@ -108,24 +86,49 @@ public class Main {
     }
 
 
-    //EncodeTransactions
-    private static Transaction transactionStringEncoded(String encodedFiles) {
 
-        String[] parts = encodedFiles.split(Pattern.quote("|"));
+    //Home Screen Method
+    private static void homeScreen() {
+        String home = """
+                
+                Welcome to the Accounting Ledger:
+                D: Add A Deposit
+                P: Make A Payment
+                L: Go to the Ledger Screen
+                X: Exit the Application
+                
+                What do you want to do?:\s""";
 
-        String dateString = parts[0];
-        String timeString = parts[1];
-        String description = parts[2];
-        String vendor = parts[3];
-        double amount = Double.parseDouble(parts[4]);
+        // Using A String to type each letter and inputting it into the console class for the scanner.
+        String input;
+        do {
+            input = console.promptForString(home);
+            switch (input.toUpperCase()) {
 
+                case "D":
+                    // Make A Deposit (payment will be false)
+                    depositOrPaymentTransaction(false);
+                    break;
+                case "P":
+                    // Make A Payment (payment will be true)
+                    depositOrPaymentTransaction(true);
+                    break;
+                case "L":
+                    // Go to the Ledger Screen
+                    ledgerScreen();
+                    break;
 
-        LocalDate date = LocalDate.parse(dateString);
-        LocalTime time = LocalTime.parse(timeString);
-
-        return new Transaction(date, time, vendor, description, amount);
-
+                //Quits the application
+                case "X":
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid input....Please use the letters seen above");
+            }
+        } while (!input.equalsIgnoreCase("X"));
     }
+
+
 
 
     //Writing to the csv file
@@ -149,6 +152,7 @@ public class Main {
     }
 
 
+
     //Make A deposit or Payment Method
     private static void depositOrPaymentTransaction(boolean isPayment) {
 
@@ -156,28 +160,17 @@ public class Main {
         String vendor = console.promptForString("Vendors Name?: ").trim();
         double amount = console.promptForDouble("Input the amount: ");
 
+
         if (isPayment) {
             amount = -amount;
+            System.out.println("Your payment has been processed. Please look into ledger for your information.");
+        } else {
+            System.out.println("Your deposit has been completed. Please look into ledger for your information.");
         }
 
         Transaction format = new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount);
         transactions.add(format);
         writeToLog();
-
-
-
-
-    }
-
-
-    //Display Deposits and Payments
-    private static void displayAllTransactions() {
-
-        for (Transaction t : transactions){
-            if(t.showSpecificValues().equalsIgnoreCase(t.showSpecificValues())){
-                System.out.println(t.showSpecificValues());
-            }
-        }
 
 
 
@@ -195,6 +188,7 @@ public class Main {
                 P: Payments only
                 R: Go To Reports page
                 H: Return to Home Screen
+                
                 Enter your choice:\s""";
 
         String choice;
@@ -205,7 +199,6 @@ public class Main {
                 case "A":
                     displayAllTransactions(); // Shows both Deposits and Payments
                     break;
-
 
                 case "D": //Deposits Only;
                     displayTransactionOfChoice(false);
@@ -221,15 +214,24 @@ public class Main {
 
                 case "H": //Returns to the Home Page
                     break;
-
+                default:
+                    System.out.println("Wrong Input..please use the above");
             }
-
-
         } while (!choice.equalsIgnoreCase("H"));
-
 
     }
 
+
+    //Display Deposits and Payments
+    private static void displayAllTransactions() {
+
+        for (Transaction t : transactions){
+            if(t.showSpecificValues().equalsIgnoreCase(t.showSpecificValues())){
+                System.out.println(t.showSpecificValues());
+            }
+        }
+
+    }
 
     //Display Deposits or Payments
     private static void displayTransactionOfChoice(boolean isPayment) {
@@ -249,16 +251,6 @@ public class Main {
             }
         }
 
-//        for (TransactionManager display : transactions) {
-//            LocalDateTime today = LocalDateTime.now();
-//            DateTimeFormatter iso =
-//                    DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm:ss a|");
-//            String printedDate = today.format(iso);
-//            if (display.getPayment() == isPayment) {
-//                System.out.println(printedDate + display.paymentCheck());
-//
-//            }
-//        }
 
 
     }
@@ -276,6 +268,7 @@ public class Main {
                 5. Search by Vendor
                 6. Custom Search
                 0. Go back to Ledger Screen
+                
                 Enter 0 - 6:\s""";
 
 
@@ -392,7 +385,6 @@ public class Main {
     }
 
 
-
     //Creates a second ArrayList for the custom search functionality
     public static ArrayList<Transaction> filterTransactions(ArrayList<Transaction> input, LocalDate startDate, LocalDate endDate,
                                                             String description, String vendor, Double amount) {
@@ -443,16 +435,25 @@ public class Main {
         // Prompts the user for the start date
         String startDateInput = console.promptForString("Enter start date (YYYY-MM-DD): ");
         LocalDate startDate = null;
-        if (!startDateInput.isEmpty()) {
-            startDate = LocalDate.parse(startDateInput);
+        try {
+            if (!startDateInput.isEmpty()) {
+                startDate = LocalDate.parse(startDateInput);
+            }
+
+        }catch (DateTimeParseException e){
+            System.out.println("Incorrect Date format Please use correct format next time..Skipping");
         }
 
         // Prompts the user for the end date
         String endDateInput = console.promptForString("Enter end date (YYYY-MM-DD): ");
         LocalDate endDate = null;
-        if (!endDateInput.isEmpty()) {
-            endDate = LocalDate.parse(endDateInput);
-        }
+       try {
+           if (!endDateInput.isEmpty()) {
+               endDate = LocalDate.parse(endDateInput);
+           }
+       }catch (DateTimeParseException e){
+           System.out.println("Incorrect Date format Please use correct format next time..Skipping");
+       }
 
         // Prompts the user for description
         String description = console.promptForString("Enter description: ");
@@ -485,8 +486,6 @@ public class Main {
             System.out.println(t.showSpecificValues());
         }
     }
-
-
 
 
 // Ability to Search Via Typing in the Vendor(old version without ArrayList)
