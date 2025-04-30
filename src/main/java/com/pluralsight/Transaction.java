@@ -5,12 +5,12 @@ import java.time.format.DateTimeFormatter;
 
 public class Transaction {
 
-    LocalDate date;
-    LocalTime time;
-    String vendor;
-    String description;
-    double amount;
-    //Boolean isPayment;
+    private LocalDate date;
+    private LocalTime time;
+    private String vendor;
+    private String description;
+    private double amount;
+
 
 
     public Transaction(LocalDate date, LocalTime time, String vendor, String description, double amount) {
@@ -65,9 +65,7 @@ public class Transaction {
         this.time = time;
     }
 
-    //    public void setPayment(Boolean payment) {
-//        isPayment = payment;
-//    }
+
 
 
     public String getFormattedTransaction(){
@@ -83,11 +81,7 @@ public class Transaction {
                 this.getDescription(),
                 this.getVendor(),
                 amount);
-//        if(this.isPayment){
-//            result = String.format("%s|%s|-%.2f", this.getDescription(), this.getVendor(), this.getAmount());
-//        } else {
-//
-//        }
+
         return result;
     }
 

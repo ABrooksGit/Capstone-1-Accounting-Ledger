@@ -1,30 +1,30 @@
 package com.pluralsight;
 import java.io.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
 import java.util.regex.Pattern;
 
-public class Main {
 
+public class Main {
+    /////////////////////////////////////////////////////////////////////////////////////////////
     //Console Class
     private static Console console = new Console();
-
     //Transaction Manager Class
     private static Transaction format;
     //FileName as variable
     private static String fileName = "transactions.csv";
-
     //ArrayList
     private static ArrayList<Transaction> transactions = new ArrayList<>();
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
 
     public static void main(String[] args) {
 
         //Loads the Transactions from the csv file.
         getAllTransactions();
+
 
         //Loads the Home Screen
         homeScreen();
@@ -40,7 +40,7 @@ public class Main {
                 "Here are your options:\n" +
                 "D: Add A Deposit\n" +
                 "P: Make A Payment\n" +
-                "L: Go to the Ledger\n" +
+                "L: Go to the Ledger Screen\n" +
                 "Exit: Exit the Application\n" +
                 "Type Any of the Above Letters or Exit: ";
 
@@ -66,6 +66,7 @@ public class Main {
                     ledgerScreen();
                     break;
 
+                //Quits the application
                 case "EXIT":
                     System.out.println("Exiting...");
                     break;
@@ -79,7 +80,7 @@ public class Main {
     }
 
 
-    //    Make An Array List:
+    //Make An Array List of all transactions:
     private static ArrayList<Transaction> getAllTransactions() {
 
         try {
@@ -114,7 +115,7 @@ public class Main {
         String description = parts[2];
         String vendor = parts[3];
         double amount = Double.parseDouble(parts[4]);
-//        boolean isPayment = Boolean.parseBoolean(parts[5]);
+
 
         LocalDate date = LocalDate.parse(dateString);
         LocalTime time = LocalTime.parse(timeString);
@@ -123,6 +124,8 @@ public class Main {
 
     }
 
+
+    //Writing to the csv file
     private static void writeToLog() {
 
 
@@ -132,10 +135,7 @@ public class Main {
 
             //Only writes the latest addition
             Transaction lastTransactionOnly = transactions.get(transactions.size() - 1);
-//            LocalDateTime today = LocalDateTime.now();
-//            DateTimeFormatter iso =
-//                    DateTimeFormatter.ofPattern("\nyyyy-MM-dd|HH:mm:ss |");
-//            String printedDate = today.format(iso);
+
             String formattedTxt = lastTransactionOnly.getFormattedTransaction();
             bufferedWriter.write("\n" + formattedTxt);
 
@@ -184,12 +184,12 @@ public class Main {
 
     //Create A Ledger Screen
     private static void ledgerScreen() {
-        String ledger = "Here are the following options\n " +
+        String ledger = "\nHere are the following options\n" +
                 "A: Display all entries\n" +
                 "D: Deposits only \n" +
                 "P: Payments only\n" +
                 "R: Go To Reports page\n" +
-                "H: Return to Home Screen" +
+                "H: Return to Home Screen\n" +
                 "Enter your choice: ";
 
         String choice;
@@ -260,14 +260,15 @@ public class Main {
 
     //Go To The Report Screen
     public static void reportScreen() {
-        String reports = "This is the Report Screen\n" +
+        String reports = "\nThis is the Report Screen\n" +
                 "1. Month To Date\n" +
                 "2. Previous Month\n" +
                 "3. Year To Date\n" +
                 "4. Previous Year\n" +
                 "5. Search by Vendor\n" +
+                "6. Custom Search\n" +
                 "0. Go back to Ledger Screen\n" +
-                "Enter 0 - 5: ";
+                "Enter 0 - 6: ";
 
         int reportChoice;
 
@@ -289,6 +290,8 @@ public class Main {
                 case 5:
                     findVendor(); // Type Vendor to search
                     break;
+                case 6:
+                    customSearch(new ArrayList<>(transactions)); // Custom Search
                 case 0:
                     break;
             }
@@ -370,105 +373,7 @@ public class Main {
     }
 
 
-    //Ability to Search Via Typing in the Vendor
-    private static Transaction searchByVendor() {
-        String vendor = console.promptForString("Enter Vendor: ");
-        try {
-            FileReader displayDeposits = new FileReader(fileName);
-            BufferedReader bufferedReader = new BufferedReader(displayDeposits);
-
-            String deposits;
-
-            while ((deposits = bufferedReader.readLine()) != null) {
-                String[] depositSplits = deposits.split(Pattern.quote("|"));
-//                String vendor = depositSplits[1].trim();
-//                String description = depositSplits[2].trim();
-//                float amount = Float.parseFloat(depositSplits[3].trim());
-
-                if (depositSplits[3].contains(vendor)) {
-
-                    System.out.println(deposits);
-                }
-            }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-
-    private static void customSearch() {
-
-        String startDate = console.promptForString("Start Date (YYYY-MM-DD): ");
-        String endDate = console.promptForString("End Date (YYYY-MM-DD): ");
-        String description = console.promptForString("Description: ");
-        String vendor = console.promptForString("Vendor: ");
-        double amount = console.promptForDouble("Amount: ");
-
-        ArrayList<Transaction> filteredResults = transactions;
-
-        // filteredResults = filterByStartDate(filteredResults, startDate);
-
-        // Parse the start and end dates
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
-
-        // Loop through all transactions
-        for (Transaction t : transactions) {
-            if (t == null) {
-                continue;
-            }
-
-
-        }
-    }
-
-    private static ArrayList<Transaction> filterByStartDate(ArrayList<Transaction> input, LocalDate startDate) {
-        ArrayList<Transaction> result = new ArrayList<Transaction>();
-        //loop through original "input", and add to result if appropriate...
-        for (Transaction t : input) {
-            if()//should this be here?){
-            {
-                result.add(t);
-            }
-
-        }
-    }
-
-
-
-
-    private static void findYearDay(){
-        String findYearDay = console.promptForString("Find Year/Day (YYYY-MM-DD): ");
-        LocalDate start = LocalDate.parse(findYearDay);
-
-        for(Transaction t : transactions){
-            if(t == null){
-                continue;
-            }
-            if(t.getDate() == start){
-                System.out.println(t.showSpecificValues());
-            }
-        }
-
-
-    }
-
-    private static void findDescription(){
-        String description = console.promptForString("Description: ");
-        for(Transaction t : transactions){
-            if(t == null){
-                continue;
-            }
-            if(t.getDescription().equalsIgnoreCase(description)){
-                System.out.println(t.showSpecificValues());
-            }
-        }
-
-    }
-
-
+    //Quick Search for Vendor
     private static void findVendor() {
         String findVendor = console.promptForString("Vendor: ");
         for (Transaction t : transactions) {
@@ -479,24 +384,129 @@ public class Main {
     }
 
 
-    private static void findAmount(){
-        double amount = console.promptForDouble("Amount: ");
+    //Creates a second ArrayList for the custom search functionality
+    public static ArrayList<Transaction> filterTransactions(ArrayList<Transaction> input, LocalDate startDate, LocalDate endDate,
+                                                            String description, String vendor, Double amount) {
+        ArrayList<Transaction> result = new ArrayList<>();
 
-        for (Transaction t : transactions) {
-            if (t == null) {
-                continue;
+
+        for (Transaction t : input) {
+            boolean hasValue = true;
+
+            // Filter by start date
+            if (startDate != null && t.getDate().isBefore(startDate)) {
+                hasValue = false;
             }
-            if (t.getAmount() == amount) {
-                System.out.println(t.showSpecificValues());
+
+            // Filter by end date
+            if (endDate != null && t.getDate().isAfter(endDate)) {
+                hasValue = false;
+            }
+
+            // Filter by description
+            if (description != null && !t.getDescription().toLowerCase().contains(description.toLowerCase())) {
+                hasValue = false;
+            }
+
+            // Filter by vendor
+            if (vendor != null && !t.getVendor().toLowerCase().contains(vendor.toLowerCase())) {
+                hasValue = false;
+            }
+
+            // Filter by amount
+            if (amount != null && t.getAmount() != amount) {
+                hasValue = false;
+            }
+
+
+            if (hasValue) {
+                result.add(t);
             }
         }
 
-
-
-
+        return result;
     }
 
 
+    //Uses the second ArrayList and uses the Console class to prompt the user
+    public static void customSearch(ArrayList<Transaction> transactions) {
+
+        // Prompts the user for the start date
+        String startDateInput = console.promptForString("Enter start date (YYYY-MM-DD): ");
+        LocalDate startDate = null;
+        if (!startDateInput.isEmpty()) {
+            startDate = LocalDate.parse(startDateInput);
+        }
+
+        // Prompts the user for the end date
+        String endDateInput = console.promptForString("Enter end date (YYYY-MM-DD): ");
+        LocalDate endDate = null;
+        if (!endDateInput.isEmpty()) {
+            endDate = LocalDate.parse(endDateInput);
+        }
+
+        // Prompts the user for description
+        String description = console.promptForString("Enter description: ");
+        if (description.isEmpty()) {
+            description = null;
+        }
+
+        // Prompts the user for vendor
+        String vendor = console.promptForString("Enter vendor: ");
+        if (vendor.isEmpty()) {
+            vendor = null;
+        }
+
+        // Prompts the user for amount
+        String amountInput = console.promptForString("Enter amount: ");
+        Double amount = null;
+        if (!amountInput.isEmpty()) {
+            try {
+                amount = Double.parseDouble(amountInput);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid amount format. Skipping amount filter.");
+            }
+        }
+
+        // Call filterTransactions with the provided user inputs
+        ArrayList<Transaction> filteredTransactions = filterTransactions(transactions, startDate, endDate, description, vendor, amount);
+
+        // Display the Custom Search
+        for (Transaction t : filteredTransactions) {
+            System.out.println(t.showSpecificValues());
+        }
+    }
+
+
+
+
+// Ability to Search Via Typing in the Vendor(old version without ArrayList)
+
+//    private static Transaction searchByVendor() {
+//        String vendor = console.promptForString("Enter Vendor: ");
+//        try {
+//            FileReader displayDeposits = new FileReader(fileName);
+//            BufferedReader bufferedReader = new BufferedReader(displayDeposits);
+//
+//            String deposits;
+//
+//            while ((deposits = bufferedReader.readLine()) != null) {
+//                String[] depositSplits = deposits.split(Pattern.quote("|"));
+//                String vendor = depositSplits[1].trim();
+//                String description = depositSplits[2].trim();
+//                float amount = Float.parseFloat(depositSplits[3].trim());
+//
+//                if (depositSplits[3].contains(vendor)) {
+//
+//                    System.out.println(deposits);
+//                }
+//            }
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return null;
+//    }
 
 
 }
