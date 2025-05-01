@@ -70,6 +70,7 @@ public class Transaction {
 
 
 
+
     public String getFormattedToLog(){
         String dateString = this.date.toString();
 
@@ -91,27 +92,27 @@ public class Transaction {
 
 
     public String getFormatted(){
-            String dateString = this.date.toString();
+        String dateString = this.date.toString();
 
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String formattedTime = time.format(timeFormatter);
 
-            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-            String formattedTime = time.format(timeFormatter);
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+        String formattedAmount = currencyFormatter.format(amount);
 
-            NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
-            String formattedAmount = currencyFormatter.format(amount);
-
-            String result = String.format("%s|%s|%s|%s|%s",
-                    dateString,
-                    formattedTime,
-                    this.getDescription(),
-                    this.getVendor(),
-                    formattedAmount);
-
-            return result;
+        return String.format("%-12s|%-10s|%-30s|%-20s|%s",
+                dateString, formattedTime, this.description, this.vendor, formattedAmount);
         }
 
 
-    }
+
+
+public static String getFormattedLedgerTextHeader() {
+    return    "\nDATE         TIME       DESCRIPTION                    VENDOR               AMOUNT ($)\n"
+            + "------------|----------|------------------------------|--------------------|----------";
+}
+
+}
 
 
 

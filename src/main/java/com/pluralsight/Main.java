@@ -1,4 +1,5 @@
 package com.pluralsight;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -147,7 +148,7 @@ public class Main {
 
             bufferedWriter.close();
         } catch (IOException e) {
-            System.out.println(ColorCodes.RED +"Error: Could not save the Data" + ColorCodes.RESET);
+            System.out.println(ColorCodes.RED + "Error: Could not save the Data" + ColorCodes.RESET);
         }
     }
 
@@ -162,7 +163,7 @@ public class Main {
 
         if (isPayment) {
             amount = -Math.abs(amount);
-            System.out.println(ColorCodes.BLUE + "Your payment has been processed. Please look into ledger for your information."+ ColorCodes.RESET);
+            System.out.println(ColorCodes.BLUE + "Your payment has been processed. Please look into ledger for your information." + ColorCodes.RESET);
         } else {
             System.out.println(ColorCodes.BLUE + "Your deposit has been completed. Please look into ledger for your information." + ColorCodes.RESET);
         }
@@ -172,7 +173,6 @@ public class Main {
         writeToLog();
 
     }
-
 
 
     //Create A Ledger Screen
@@ -212,19 +212,19 @@ public class Main {
                 case "H": //Returns to the Home Page
                     break;
                 default:
-                    System.out.println(ColorCodes.RED + "Wrong Input..please use the above"+ ColorCodes.RESET);
+                    System.out.println(ColorCodes.RED + "Wrong Input..please use the above" + ColorCodes.RESET);
             }
         } while (!choice.equalsIgnoreCase("H"));
 
     }
 
 
-
     //Display Deposits and Payments
     private static void displayAllTransactions() {
+        System.out.println(Transaction.getFormattedLedgerTextHeader());
 
         for (Transaction t : transactions) {
-            if (t.getFormatted().equalsIgnoreCase(t.getFormatted())) {
+           {
                 System.out.println(t.getFormatted());
             }
         }
@@ -232,10 +232,9 @@ public class Main {
     }
 
 
-
     //Display Deposits or Payments
     private static void displayTransactionOfChoice(boolean isPayment) {
-
+        System.out.println(Transaction.getFormattedLedgerTextHeader());
         if (isPayment) {
             for (Transaction t : transactions) {
                 if (t.getAmount() < 0) {
@@ -252,7 +251,6 @@ public class Main {
         }
 
     }
-
 
 
     //Go To The Report Screen
@@ -298,79 +296,80 @@ public class Main {
     }
 
 
-
     //Methods DatesAndYears
     public static void searchViaDatesAndYears(int dateFound) {
 
-                LocalDate today = LocalDate.now();
-                int currentMonth = today.getMonthValue();
-                int startOfMonth = today.withDayOfMonth(1).getDayOfMonth();
-                int firstDayOfMonth = 1;
-                int lastDayOfTheYear = 31;
-                int endOfTheLastMonth = today.minusMonths(1).lengthOfMonth();
-                int currentYear = today.getYear();
-                int thisMonthBegin = today.getDayOfMonth();
-                int lastYear = currentYear - 1;
-                int lastMonth = currentMonth - 1;
-                if (lastMonth < 1) lastMonth = 12;
+        LocalDate today = LocalDate.now();
+        int currentMonth = today.getMonthValue();
+        int startOfMonth = today.withDayOfMonth(1).getDayOfMonth();
+        int firstDayOfMonth = 1;
+        int lastDayOfTheYear = 31;
+        int endOfTheLastMonth = today.minusMonths(1).lengthOfMonth();
+        int currentYear = today.getYear();
+        int thisMonthBegin = today.getDayOfMonth();
+        int lastYear = currentYear - 1;
+        int lastMonth = currentMonth - 1;
+        if (lastMonth < 1) lastMonth = 12;
 //                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-                LocalDate startOfTheMonth = LocalDate.of(currentYear, currentMonth, startOfMonth);
-                //LocalDate today = LocalDate.now();
+        LocalDate startOfTheMonth = LocalDate.of(currentYear, currentMonth, startOfMonth);
+        //LocalDate today = LocalDate.now();
 
-                LocalDate startOfTheLastMonth = LocalDate.of(currentYear, lastMonth, firstDayOfMonth);
-                LocalDate endOfLastMonth = LocalDate.of(currentYear, lastMonth, endOfTheLastMonth);
+        LocalDate startOfTheLastMonth = LocalDate.of(currentYear, lastMonth, firstDayOfMonth);
+        LocalDate endOfLastMonth = LocalDate.of(currentYear, lastMonth, endOfTheLastMonth);
 
-                LocalDate startOfTheYear = LocalDate.of(currentYear, Month.JANUARY.getValue(), thisMonthBegin);
+        LocalDate startOfTheYear = LocalDate.of(currentYear, Month.JANUARY.getValue(), thisMonthBegin);
 
-                LocalDate startOfLastYear = LocalDate.of(lastYear, Month.JANUARY.getValue(), firstDayOfMonth);
-                LocalDate EndOfTheLastYear = LocalDate.of(lastYear, Month.DECEMBER.getValue(), lastDayOfTheYear);
-
-                //Call the transaction array instead of reading it from the file.
-                for(Transaction t: transactions){
-
-                    LocalDate splitTheDates = t.getDate();
-
-                switch (dateFound) {
-                    case 1: //Start of the Month to Today
-                        if (!splitTheDates.isBefore(startOfTheMonth) && !splitTheDates.isAfter(today)) {
-
-                            System.out.println(t.getFormatted());
-
-                        }
-                        break;
-                    case 2: //The start of last Month to End of Last Month
-                        if (!splitTheDates.isBefore(startOfTheLastMonth) && !splitTheDates.isAfter(endOfLastMonth)) {
-                            System.out.println(t.getFormatted());
-
-                        }
-                        break;
-                    case 3://The start of the Year to Today
-                        if (!splitTheDates.isBefore(startOfTheYear) && !splitTheDates.isAfter(today)) {
-                            System.out.println(t.getFormatted());
-
-                        }
-                        break;
-                    case 4: //The start of Last Year til the end of Last Year
-                        if (!splitTheDates.isBefore(startOfLastYear) && !splitTheDates.isAfter(EndOfTheLastYear)) {
-                            System.out.println(t.getFormatted());
-
-                        }
-                        break;
+        LocalDate startOfLastYear = LocalDate.of(lastYear, Month.JANUARY.getValue(), firstDayOfMonth);
+        LocalDate EndOfTheLastYear = LocalDate.of(lastYear, Month.DECEMBER.getValue(), lastDayOfTheYear);
 
 
-                }
+        System.out.println(Transaction.getFormattedLedgerTextHeader());
+        //Call the transaction array instead of reading it from the file.
+        for (Transaction t : transactions) {
+
+            LocalDate splitTheDates = t.getDate();
+
+
+            switch (dateFound) {
+                case 1: //Start of the Month to Today
+                    if (!splitTheDates.isBefore(startOfTheMonth) && !splitTheDates.isAfter(today)) {
+
+                        System.out.println(t.getFormatted());
+
+                    }
+                    break;
+                case 2: //The start of last Month to End of Last Month
+                    if (!splitTheDates.isBefore(startOfTheLastMonth) && !splitTheDates.isAfter(endOfLastMonth)) {
+                        System.out.println(t.getFormatted());
+
+                    }
+                    break;
+                case 3://The start of the Year to Today
+                    if (!splitTheDates.isBefore(startOfTheYear) && !splitTheDates.isAfter(today)) {
+                        System.out.println(t.getFormatted());
+
+                    }
+                    break;
+                case 4: //The start of Last Year til the end of Last Year
+                    if (!splitTheDates.isBefore(startOfLastYear) && !splitTheDates.isAfter(EndOfTheLastYear)) {
+                        System.out.println(t.getFormatted());
+
+                    }
+                    break;
+
 
             }
 
+        }
 
 
     }
 
 
-
     //Quick Search for Vendor
     private static void findVendor() {
+        System.out.println(Transaction.getFormattedLedgerTextHeader());
         String findVendor = console.promptForString("Vendor: ");
         for (Transaction t : transactions) {
             if (t.getVendor().equalsIgnoreCase(findVendor)) {
@@ -378,7 +377,6 @@ public class Main {
             }
         }
     }
-
 
 
     //Creates a second ArrayList for the custom search functionality
@@ -425,9 +423,9 @@ public class Main {
     }
 
 
-
     //Uses the second ArrayList and uses the Console class to prompt the user
     public static void customSearch(ArrayList<Transaction> transactions) {
+
 
         //Prompts the user for the start date
         LocalDate startDateInput = console.promptForDate("Enter start date (YYYY-MM-DD): ");
@@ -436,50 +434,44 @@ public class Main {
         LocalDate endDateInput = console.promptForDate("Enter end date (YYYY-MM-DD): ");
 
 
-            // Prompts the user for description
-            String description = console.promptForString("Enter description: ");
-            if (description.isEmpty()) {
-                description = null;
-            }
+        // Prompts the user for description
+        String description = console.promptForString("Enter description: ");
+        if (description.isEmpty()) {
+            description = null;
+        }
 
-            // Prompts the user for vendor
-            String vendor = console.promptForString("Enter vendor: ");
-            if (vendor.isEmpty()) {
-                vendor = null;
-            }
+        // Prompts the user for vendor
+        String vendor = console.promptForString("Enter vendor: ");
+        if (vendor.isEmpty()) {
+            vendor = null;
+        }
 
-            // Prompts the user for amount
-            String amountInput;
-            Double amount = null;
+        // Prompts the user for amount
+        String amountInput;
+        Double amount = null;
 
-            while(true){
-                try {
-                    amountInput = console.promptForString("Enter amount: ");
-                    if (!amountInput.isEmpty())
-                        amount = Double.parseDouble(amountInput);
-                  break;
-                } catch (NumberFormatException e) {
-                    System.out.println(ColorCodes.RED + "Invalid amount format. Please enter a number." + ColorCodes.RESET);
-                }
-            }
-
-            // Call filterTransactions with the provided user inputs
-            ArrayList<Transaction> filteredTransactions = filterTransactions(transactions, startDateInput, endDateInput, description, vendor, amount);
-
-            // Display the Custom Search
-            for (Transaction t : filteredTransactions) {
-                System.out.println(t.getFormatted());
+        while (true) {
+            try {
+                amountInput = console.promptForString("Enter amount: ");
+                if (!amountInput.isEmpty())
+                    amount = Double.parseDouble(amountInput);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println(ColorCodes.RED + "Invalid amount format. Please enter a number." + ColorCodes.RESET);
             }
         }
 
-
-
+        // Call filterTransactions with the provided user inputs
+        ArrayList<Transaction> filteredTransactions = filterTransactions(transactions, startDateInput, endDateInput, description, vendor, amount);
+        System.out.println(Transaction.getFormattedLedgerTextHeader());
+        // Display the Custom Search
+        for (Transaction t : filteredTransactions) {
+            System.out.println(t.getFormatted());
+        }
     }
 
 
-
-
-
+}
 
 
 // Ability to Search Via Typing in the Vendor(old version without ArrayList)
@@ -513,6 +505,10 @@ public class Main {
 
 
 
+
+
+
+
 //Make An Array List of all transactions:
 //    private static void getAllTransactions() {
 //
@@ -539,48 +535,3 @@ public class Main {
 //
 //    }
 
-//        // Prompts the user for the start date
-//        String startDateInput = console.promptForString("Enter start date (YYYY-MM-DD): ");
-//        LocalDate startDate = null;
-//        try {
-//            if (!startDateInput.isEmpty()) {
-//                startDate = LocalDate.parse(startDateInput);
-//            }
-//
-//        } catch (DateTimeParseException e) {
-//            System.out.println("Incorrect Date format Please use correct format next time..Skipping");
-//        }
-
-
-
-// Prompts the user for the start date
-//        String startDateInput = console.promptForString("Enter start date (YYYY-MM-DD): ");
-//        LocalDate startDate = null;
-//        while(true)
-//        try {
-//            if (!startDateInput.isEmpty()) {
-//                startDate = LocalDate.parse(startDateInput);
-//                break;
-//            }
-//
-//        } catch (DateTimeParseException e) {
-//            System.out.println("Incorrect Date format Please use correct format next time..Skipping");
-//        }
-
-
-
-//        // Prompts the user for the start date
-//        while (true) {
-//            if (startDateInput.isEmpty()) {
-//                break;
-//            } else {
-//                try {
-//                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-//                    startDate = LocalDate.parse(startDateInput/*,formatter)*/);
-//                    break;
-//                } catch (DateTimeParseException e) {
-//                    System.out.println("Incorrect date format. Please use the correct format (YYYY-MM-DD) or skip.");
-//                    startDateInput = console.promptForString("Enter start date (YYYY-MM-DD): ");
-//                }
-//            }
-//        }
