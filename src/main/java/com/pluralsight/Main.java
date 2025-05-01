@@ -13,10 +13,15 @@ public class Main {
     /// //////////////////////////////////////////////////////////////////////////////////////////
     //Console Class
     private static Console console = new Console();
+
+
     //Transaction Manager Class
     //    private static Transaction format;
+
     //FileName as variable
     private static String fileName = "transactions.csv";
+
+
     //ArrayList
     private static ArrayList<Transaction> transactions = new ArrayList<>();
 
@@ -184,7 +189,7 @@ public class Main {
 
 
         if (isPayment) {
-            amount = -amount;
+            amount = -Math.abs(amount);
             System.out.println("Your payment has been processed. Please look into ledger for your information.");
         } else {
             System.out.println("Your deposit has been completed. Please look into ledger for your information.");
@@ -288,9 +293,7 @@ public class Main {
                 
                 Enter 0 - 6:\s""";
 
-
         int reportChoice;
-
         do {
             reportChoice = console.promptForInt(reports);
             switch (reportChoice) {
@@ -315,19 +318,11 @@ public class Main {
                     break;
             }
         } while (reportChoice != 0);
-
     }
 
 
     //Methods DatesAndYears
     public static void searchViaDatesAndYears(int dateFound) {
-        try {
-            FileReader displayDeposits = new FileReader(fileName);
-            BufferedReader bufferedReader = new BufferedReader(displayDeposits);
-
-            String search;
-            while ((search = bufferedReader.readLine()) != null) {
-                String[] yearAndMonthSplit = search.split(Pattern.quote("|"));
 
                 LocalDate today = LocalDate.now();
                 int currentMonth = today.getMonthValue();
@@ -340,7 +335,7 @@ public class Main {
                 int lastYear = currentYear - 1;
                 int lastMonth = currentMonth - 1;
                 if (lastMonth < 1) lastMonth = 12;
-
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate startOfTheMonth = LocalDate.of(currentYear, currentMonth, startOfMonth);
 
                 LocalDate startOfTheLastMonth = LocalDate.of(currentYear, lastMonth, firstDayOfMonth);
@@ -355,36 +350,34 @@ public class Main {
                 LocalDate startOfLastYear = LocalDate.of(lastYear, Month.JANUARY.getValue(), firstDayOfMonth);
                 LocalDate EndOfTheLastYear = LocalDate.of(lastYear, Month.DECEMBER.getValue(), lastDayOfTheYear);
 
+                //Call the transaction array instead of reading it from the file.
+                for(Transaction t: transactions){
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-
-                LocalDate splitTheDates = LocalDate.parse(yearAndMonthSplit[0], formatter);
-
+                    LocalDate splitTheDates = t.getDate();
 
                 switch (dateFound) {
                     case 1: //Start of the Month to Today
                         if (!splitTheDates.isBefore(startOfTheMonth) && !splitTheDates.isAfter(today)) {
 
-                            System.out.println(search);
+                            System.out.println(t.getFormattedTransaction());
 
                         }
                         break;
                     case 2: //The start of last Month to End of Last Month
                         if (!splitTheDates.isBefore(startOfTheLastMonth) && !splitTheDates.isAfter(endOfLastMonth)) {
-                            System.out.println(search);
+                            System.out.println(t.getFormattedTransaction());
 
                         }
                         break;
                     case 3://The start of the Year to Today
                         if (!splitTheDates.isBefore(startOfTheYear) && !splitTheDates.isAfter(today)) {
-                            System.out.println(search);
+                            System.out.println(t.getFormattedTransaction());
 
                         }
                         break;
                     case 4: //The start of Last Year til the end of Last Year
                         if (!splitTheDates.isBefore(startOfLastYear) && !splitTheDates.isAfter(EndOfTheLastYear)) {
-                            System.out.println(search);
+                            System.out.println(t.getFormattedTransaction());
 
                         }
                         break;
@@ -394,11 +387,10 @@ public class Main {
 
             }
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
 
     }
+
 
     //Quick Search for Vendor
     private static void findVendor() {
@@ -458,27 +450,31 @@ public class Main {
     //Uses the second ArrayList and uses the Console class to prompt the user
     public static void customSearch(ArrayList<Transaction> transactions) {
 
-        // Prompts the user for the start date
-        String startDateInput = console.promptForString("Enter start date (YYYY-MM-DD): ");
+        //Prompts the user for the start date
         LocalDate startDate = null;
-        try {
+        while(true) try {
+            String startDateInput = console.promptForString("Enter start date (YYYY-MM-DD): ");
+
             if (!startDateInput.isEmpty()) {
                 startDate = LocalDate.parse(startDateInput);
             }
+            break;
 
         } catch (DateTimeParseException e) {
-            System.out.println("Incorrect Date format Please use correct format next time..Skipping");
+            System.out.println("Incorrect Date format Please use correct format (YYYY-MM-DD) or skip.");
         }
 
         // Prompts the user for the end date
-        String endDateInput = console.promptForString("Enter end date (YYYY-MM-DD): ");
         LocalDate endDate = null;
-        try {
+        while(true) try {
+            String endDateInput = console.promptForString("Enter end date (YYYY-MM-DD): ");
+
             if (!endDateInput.isEmpty()) {
                 endDate = LocalDate.parse(endDateInput);
             }
+            break;
         } catch (DateTimeParseException e) {
-            System.out.println("Incorrect Date format Please use correct format next time..Skipping");
+            System.out.println("Incorrect Date format Please use the correct format (YYYY-MM-DD) or skip");
         }
 
         // Prompts the user for description
@@ -517,6 +513,16 @@ public class Main {
 
 
 
+
+
+
+
+
+
+
+
+
+
 // Ability to Search Via Typing in the Vendor(old version without ArrayList)
 
 //    private static Transaction searchByVendor() {
@@ -547,3 +553,49 @@ public class Main {
 
 
 
+
+//        // Prompts the user for the start date
+//        String startDateInput = console.promptForString("Enter start date (YYYY-MM-DD): ");
+//        LocalDate startDate = null;
+//        try {
+//            if (!startDateInput.isEmpty()) {
+//                startDate = LocalDate.parse(startDateInput);
+//            }
+//
+//        } catch (DateTimeParseException e) {
+//            System.out.println("Incorrect Date format Please use correct format next time..Skipping");
+//        }
+
+
+
+// Prompts the user for the start date
+//        String startDateInput = console.promptForString("Enter start date (YYYY-MM-DD): ");
+//        LocalDate startDate = null;
+//        while(true)
+//        try {
+//            if (!startDateInput.isEmpty()) {
+//                startDate = LocalDate.parse(startDateInput);
+//                break;
+//            }
+//
+//        } catch (DateTimeParseException e) {
+//            System.out.println("Incorrect Date format Please use correct format next time..Skipping");
+//        }
+
+
+
+//        // Prompts the user for the start date
+//        while (true) {
+//            if (startDateInput.isEmpty()) {
+//                break;
+//            } else {
+//                try {
+////                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+//                    startDate = LocalDate.parse(startDateInput/*,formatter)*/);
+//                    break;
+//                } catch (DateTimeParseException e) {
+//                    System.out.println("Incorrect date format. Please use the correct format (YYYY-MM-DD) or skip.");
+//                    startDateInput = console.promptForString("Enter start date (YYYY-MM-DD): ");
+//                }
+//            }
+//        }

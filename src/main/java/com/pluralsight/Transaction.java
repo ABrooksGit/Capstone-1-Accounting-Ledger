@@ -1,7 +1,8 @@
+//Constructor
 package com.pluralsight;
-
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+
 
 public class Transaction {
 
@@ -12,7 +13,7 @@ public class Transaction {
     private double amount;
 
 
-
+    //output format for arraylist
     public Transaction(LocalDate date, LocalTime time,String description, String vendor,double amount) {
         this.date = date;
         this.time = time;

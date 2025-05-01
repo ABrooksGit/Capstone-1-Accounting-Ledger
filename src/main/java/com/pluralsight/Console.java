@@ -41,6 +41,7 @@ public class Console {
                 return result;
             } catch (Exception e) {
                 System.out.println("Not a valid input, please enter a valid float.");
+                scanner.nextLine();
             }
         }
         return result;
@@ -59,6 +60,7 @@ public class Console {
                 return result;
             } catch (Exception e) {
                 System.out.println("Not a valid input, please enter a valid double.");
+                scanner.nextLine();
             }
         }
         return result;
