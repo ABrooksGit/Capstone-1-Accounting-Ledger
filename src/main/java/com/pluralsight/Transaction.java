@@ -1,5 +1,6 @@
 //Constructor
 package com.pluralsight;
+import java.text.NumberFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
@@ -69,30 +70,48 @@ public class Transaction {
 
 
 
-    public String getFormattedTransaction(){
-        String dateStr = this.date.toString();
-        String timeStr = this.time.toString();
+    public String getFormattedToLog(){
+        String dateString = this.date.toString();
+
 
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String formattedTime = time.format(timeFormatter);
 
         String result = String.format("%s|%s|%s|%s|%.2f",
-                dateStr,
+                dateString,
                 formattedTime,
                 this.getDescription(),
                 this.getVendor(),
-                amount);
+                this.amount);
 
         return result;
     }
 
 
-    public String showSpecificValues(){
 
-        return String.format("%s|%s|%s|%s|%.2f", this.date, this.time, this.description, this.vendor, this.amount);
+
+    public String getFormatted(){
+            String dateString = this.date.toString();
+
+
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String formattedTime = time.format(timeFormatter);
+
+            NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+            String formattedAmount = currencyFormatter.format(amount);
+
+            String result = String.format("%s|%s|%s|%s|%s",
+                    dateString,
+                    formattedTime,
+                    this.getDescription(),
+                    this.getVendor(),
+                    formattedAmount);
+
+            return result;
+        }
 
 
     }
 
 
-}
+

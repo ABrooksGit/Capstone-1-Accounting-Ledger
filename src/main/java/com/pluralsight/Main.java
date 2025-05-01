@@ -3,8 +3,6 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -61,32 +59,6 @@ public class Main {
 
     }
 
-
-    //Make An Array List of all transactions:
-//    private static void getAllTransactions() {
-//
-//        try {
-//            FileReader transactionList = new FileReader(fileName);
-//            BufferedReader bufferedReader = new BufferedReader(transactionList);
-//            transactions = new ArrayList<>();
-//
-//            String inputString;
-//
-//            while ((inputString = bufferedReader.readLine()) != null) {
-//                //if the CSV file has A empty space, move past it and then continue
-//                if (inputString.trim().isEmpty()) {
-//                    continue;
-//                }
-//
-//                transactions.add(transactionStringEncoded(inputString));
-//
-//            }
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//    }
 
     //Make An Array List of all transactions:
     private static ArrayList<Transaction> getAllTransactionsOpt2() {
@@ -153,7 +125,7 @@ public class Main {
                     System.out.println("Exiting...");
                     break;
                 default:
-                    System.out.println("Invalid input....Please use the letters seen above");
+                    System.out.println(ColorCodes.RED + "Invalid input....Please use the letters seen above" + ColorCodes.RESET);
             }
         } while (!input.equalsIgnoreCase("X"));
     }
@@ -170,12 +142,12 @@ public class Main {
             //Only writes the latest addition
             Transaction lastTransactionOnly = transactions.getLast();
 
-            String formattedTxt = lastTransactionOnly.getFormattedTransaction();
+            String formattedTxt = lastTransactionOnly.getFormattedToLog();
             bufferedWriter.write("\n" + formattedTxt);
 
             bufferedWriter.close();
         } catch (IOException e) {
-            System.out.println("Error: Could not save the Data");
+            System.out.println(ColorCodes.RED +"Error: Could not save the Data" + ColorCodes.RESET);
         }
     }
 
@@ -190,16 +162,17 @@ public class Main {
 
         if (isPayment) {
             amount = -Math.abs(amount);
-            System.out.println("Your payment has been processed. Please look into ledger for your information.");
+            System.out.println(ColorCodes.BLUE + "Your payment has been processed. Please look into ledger for your information."+ ColorCodes.RESET);
         } else {
-            System.out.println("Your deposit has been completed. Please look into ledger for your information.");
+            System.out.println(ColorCodes.BLUE + "Your deposit has been completed. Please look into ledger for your information." + ColorCodes.RESET);
         }
 
-        Transaction format = new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount);
-        transactions.add(format);
+        Transaction t = new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount);
+        transactions.add(t);
         writeToLog();
 
     }
+
 
 
     //Create A Ledger Screen
@@ -239,23 +212,26 @@ public class Main {
                 case "H": //Returns to the Home Page
                     break;
                 default:
-                    System.out.println("Wrong Input..please use the above");
+                    System.out.println(ColorCodes.RED + "Wrong Input..please use the above"+ ColorCodes.RESET);
             }
         } while (!choice.equalsIgnoreCase("H"));
 
     }
 
 
+
     //Display Deposits and Payments
     private static void displayAllTransactions() {
 
         for (Transaction t : transactions) {
-            if (t.showSpecificValues().equalsIgnoreCase(t.showSpecificValues())) {
-                System.out.println(t.getFormattedTransaction());
+            if (t.getFormatted().equalsIgnoreCase(t.getFormatted())) {
+                System.out.println(t.getFormatted());
             }
         }
 
     }
+
+
 
     //Display Deposits or Payments
     private static void displayTransactionOfChoice(boolean isPayment) {
@@ -263,19 +239,20 @@ public class Main {
         if (isPayment) {
             for (Transaction t : transactions) {
                 if (t.getAmount() < 0) {
-                    System.out.println(t.getFormattedTransaction());
+                    System.out.println(t.getFormatted());
                 }
             }
 
         } else {
             for (Transaction t : transactions) {
                 if (t.getAmount() > 0) {
-                    System.out.println(t.getFormattedTransaction());
+                    System.out.println(t.getFormatted());
                 }
             }
         }
 
     }
+
 
 
     //Go To The Report Screen
@@ -321,6 +298,7 @@ public class Main {
     }
 
 
+
     //Methods DatesAndYears
     public static void searchViaDatesAndYears(int dateFound) {
 
@@ -336,16 +314,14 @@ public class Main {
                 int lastMonth = currentMonth - 1;
                 if (lastMonth < 1) lastMonth = 12;
 //                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
                 LocalDate startOfTheMonth = LocalDate.of(currentYear, currentMonth, startOfMonth);
-
-                LocalDate startOfTheLastMonth = LocalDate.of(currentYear, lastMonth, firstDayOfMonth);
-
-                LocalDate endOfLastMonth = LocalDate.of(currentYear, lastMonth, endOfTheLastMonth);
-
-
-                LocalDate startOfTheYear = LocalDate.of(currentYear, Month.JANUARY.getValue(), thisMonthBegin);
                 //LocalDate today = LocalDate.now();
 
+                LocalDate startOfTheLastMonth = LocalDate.of(currentYear, lastMonth, firstDayOfMonth);
+                LocalDate endOfLastMonth = LocalDate.of(currentYear, lastMonth, endOfTheLastMonth);
+
+                LocalDate startOfTheYear = LocalDate.of(currentYear, Month.JANUARY.getValue(), thisMonthBegin);
 
                 LocalDate startOfLastYear = LocalDate.of(lastYear, Month.JANUARY.getValue(), firstDayOfMonth);
                 LocalDate EndOfTheLastYear = LocalDate.of(lastYear, Month.DECEMBER.getValue(), lastDayOfTheYear);
@@ -359,25 +335,25 @@ public class Main {
                     case 1: //Start of the Month to Today
                         if (!splitTheDates.isBefore(startOfTheMonth) && !splitTheDates.isAfter(today)) {
 
-                            System.out.println(t.getFormattedTransaction());
+                            System.out.println(t.getFormatted());
 
                         }
                         break;
                     case 2: //The start of last Month to End of Last Month
                         if (!splitTheDates.isBefore(startOfTheLastMonth) && !splitTheDates.isAfter(endOfLastMonth)) {
-                            System.out.println(t.getFormattedTransaction());
+                            System.out.println(t.getFormatted());
 
                         }
                         break;
                     case 3://The start of the Year to Today
                         if (!splitTheDates.isBefore(startOfTheYear) && !splitTheDates.isAfter(today)) {
-                            System.out.println(t.getFormattedTransaction());
+                            System.out.println(t.getFormatted());
 
                         }
                         break;
                     case 4: //The start of Last Year til the end of Last Year
                         if (!splitTheDates.isBefore(startOfLastYear) && !splitTheDates.isAfter(EndOfTheLastYear)) {
-                            System.out.println(t.getFormattedTransaction());
+                            System.out.println(t.getFormatted());
 
                         }
                         break;
@@ -392,15 +368,17 @@ public class Main {
     }
 
 
+
     //Quick Search for Vendor
     private static void findVendor() {
         String findVendor = console.promptForString("Vendor: ");
         for (Transaction t : transactions) {
             if (t.getVendor().equalsIgnoreCase(findVendor)) {
-                System.out.println(t.getFormattedTransaction());
+                System.out.println(t.getFormatted());
             }
         }
     }
+
 
 
     //Creates a second ArrayList for the custom search functionality
@@ -410,8 +388,8 @@ public class Main {
 
 
         for (Transaction t : input) {
-            boolean hasValue = true;
 
+            boolean hasValue = true;
             // Filter by start date
             if (startDate != null && t.getDate().isBefore(startDate)) {
                 hasValue = false;
@@ -447,75 +425,56 @@ public class Main {
     }
 
 
+
     //Uses the second ArrayList and uses the Console class to prompt the user
     public static void customSearch(ArrayList<Transaction> transactions) {
 
         //Prompts the user for the start date
-        LocalDate startDate = null;
-        while(true) try {
-            String startDateInput = console.promptForString("Enter start date (YYYY-MM-DD): ");
-
-            if (!startDateInput.isEmpty()) {
-                startDate = LocalDate.parse(startDateInput);
-            }
-            break;
-
-        } catch (DateTimeParseException e) {
-            System.out.println("Incorrect Date format Please use correct format (YYYY-MM-DD) or skip.");
-        }
+        LocalDate startDateInput = console.promptForDate("Enter start date (YYYY-MM-DD): ");
 
         // Prompts the user for the end date
-        LocalDate endDate = null;
-        while(true) try {
-            String endDateInput = console.promptForString("Enter end date (YYYY-MM-DD): ");
+        LocalDate endDateInput = console.promptForDate("Enter end date (YYYY-MM-DD): ");
 
-            if (!endDateInput.isEmpty()) {
-                endDate = LocalDate.parse(endDateInput);
+
+            // Prompts the user for description
+            String description = console.promptForString("Enter description: ");
+            if (description.isEmpty()) {
+                description = null;
             }
-            break;
-        } catch (DateTimeParseException e) {
-            System.out.println("Incorrect Date format Please use the correct format (YYYY-MM-DD) or skip");
-        }
 
-        // Prompts the user for description
-        String description = console.promptForString("Enter description: ");
-        if (description.isEmpty()) {
-            description = null;
-        }
+            // Prompts the user for vendor
+            String vendor = console.promptForString("Enter vendor: ");
+            if (vendor.isEmpty()) {
+                vendor = null;
+            }
 
-        // Prompts the user for vendor
-        String vendor = console.promptForString("Enter vendor: ");
-        if (vendor.isEmpty()) {
-            vendor = null;
-        }
+            // Prompts the user for amount
+            String amountInput;
+            Double amount = null;
 
-        // Prompts the user for amount
-        String amountInput = console.promptForString("Enter amount: ");
-        Double amount = null;
-        if (!amountInput.isEmpty()) {
-            try {
-                amount = Double.parseDouble(amountInput);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid amount format. Skipping amount filter.");
+            while(true){
+                try {
+                    amountInput = console.promptForString("Enter amount: ");
+                    if (!amountInput.isEmpty())
+                        amount = Double.parseDouble(amountInput);
+                  break;
+                } catch (NumberFormatException e) {
+                    System.out.println(ColorCodes.RED + "Invalid amount format. Please enter a number." + ColorCodes.RESET);
+                }
+            }
+
+            // Call filterTransactions with the provided user inputs
+            ArrayList<Transaction> filteredTransactions = filterTransactions(transactions, startDateInput, endDateInput, description, vendor, amount);
+
+            // Display the Custom Search
+            for (Transaction t : filteredTransactions) {
+                System.out.println(t.getFormatted());
             }
         }
 
-        // Call filterTransactions with the provided user inputs
-        ArrayList<Transaction> filteredTransactions = filterTransactions(transactions, startDate, endDate, description, vendor, amount);
 
-        // Display the Custom Search
-        for (Transaction t : filteredTransactions) {
-            System.out.println(t.getFormattedTransaction());
-        }
+
     }
-
-}
-
-
-
-
-
-
 
 
 
@@ -554,6 +513,32 @@ public class Main {
 
 
 
+//Make An Array List of all transactions:
+//    private static void getAllTransactions() {
+//
+//        try {
+//            FileReader transactionList = new FileReader(fileName);
+//            BufferedReader bufferedReader = new BufferedReader(transactionList);
+//            transactions = new ArrayList<>();
+//
+//            String inputString;
+//
+//            while ((inputString = bufferedReader.readLine()) != null) {
+//                //if the CSV file has A empty space, move past it and then continue
+//                if (inputString.trim().isEmpty()) {
+//                    continue;
+//                }
+//
+//                transactions.add(transactionStringEncoded(inputString));
+//
+//            }
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
+
 //        // Prompts the user for the start date
 //        String startDateInput = console.promptForString("Enter start date (YYYY-MM-DD): ");
 //        LocalDate startDate = null;
@@ -590,7 +575,7 @@ public class Main {
 //                break;
 //            } else {
 //                try {
-////                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+//                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 //                    startDate = LocalDate.parse(startDateInput/*,formatter)*/);
 //                    break;
 //                } catch (DateTimeParseException e) {
