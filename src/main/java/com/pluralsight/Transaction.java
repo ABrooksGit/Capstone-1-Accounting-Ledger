@@ -70,7 +70,7 @@ public class Transaction {
 
 
 
-
+        //Specifically for writing to the CSV file.
     public String getFormattedToLog(){
         String dateString = this.date.toString();
 
@@ -90,7 +90,7 @@ public class Transaction {
 
 
 
-
+        //The String to write to the console.
     public String getFormatted(){
         String dateString = this.date.toString();
 
@@ -106,7 +106,7 @@ public class Transaction {
 
 
 
-
+        //Header display
 public static String getFormattedLedgerTextHeader() {
     return    "\nDATE         TIME       DESCRIPTION                    VENDOR               AMOUNT ($)\n"
             + "------------|----------|------------------------------|--------------------|----------";

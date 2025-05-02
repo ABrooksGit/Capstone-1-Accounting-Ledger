@@ -463,8 +463,9 @@ public class Main {
 
         // Call filterTransactions with the provided user inputs
         ArrayList<Transaction> filteredTransactions = filterTransactions(transactions, startDateInput, endDateInput, description, vendor, amount);
-        System.out.println(Transaction.getFormattedLedgerTextHeader());
+
         // Display the Custom Search
+        System.out.println(Transaction.getFormattedLedgerTextHeader());
         for (Transaction t : filteredTransactions) {
             System.out.println(t.getFormatted());
         }
