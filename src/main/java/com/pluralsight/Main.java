@@ -369,8 +369,8 @@ public class Main {
 
     //Quick Search for Vendor
     private static void findVendor() {
-        System.out.println(Transaction.getFormattedLedgerTextHeader());
         String findVendor = console.promptForString("Vendor: ");
+        System.out.println(Transaction.getFormattedLedgerTextHeader());
         for (Transaction t : transactions) {
             if (t.getVendor().equalsIgnoreCase(findVendor)) {
                 System.out.println(t.getFormatted());
