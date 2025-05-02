@@ -75,7 +75,7 @@ public class Transaction {
         String dateString = this.date.toString();
 
 
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         String formattedTime = time.format(timeFormatter);
 
         String result = String.format("%s|%s|%s|%s|%.2f",
