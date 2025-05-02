@@ -85,7 +85,7 @@ public class Console {
         while (!hasResult) {
             try {
                 System.out.print(prompt);
-                String input = scanner.nextLine();
+                String input = scanner.nextLine().trim();
 
                 if (!input.isEmpty()) {
                     result = LocalDate.parse(input);
